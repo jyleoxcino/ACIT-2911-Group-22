@@ -8,8 +8,8 @@ Project Idea: Study Buddy (Agenda App)
 
 ## Team member log
 
-Jyle Oxcino - initial pull and commit 2023-04-26
-Daniel Lazzaroni - initla pull and commit 2023-04-26
+- Jyle Oxcino - initial pull and commit 2023-04-26
+- Daniel Lazzaroni - initla pull and commit 2023-04-26
 
 ## Get Started
 
