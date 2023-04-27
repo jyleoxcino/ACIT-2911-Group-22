@@ -10,10 +10,12 @@ Project Idea: Study Buddy (Agenda App)
 
 - Jyle Oxcino - initial pull and commit 2023-04-26
 - Daniel Lazzaroni - initla pull and commit 2023-04-26
+- David Tran - initial pull and commit 2023-04-26
 
 ## Get Started
 
 1. Clone this repository
+
 ```
 git clone https://github.com/jyleoxcino/ACIT-2911-Group-22.git
 ```
@@ -25,6 +27,7 @@ git clone https://github.com/jyleoxcino/ACIT-2911-Group-22.git
 _this step isn't super important but term 1 students will eventually learn to do it in term2. also it's good practice to have your development environments in virtual environments in case of something messes up_
 
 Install Venv - Virtual Environment
+
 ```
 pip install venv
 ```
@@ -34,10 +37,11 @@ Create Virtual Environment for managing Python Modules (Good Practice when devel
 ```
 python -m venv studybuddydevelopment
 ```
+
 _This will take some time to create a virtual environment in the directory you're in._
 
 Activate Virtual Environment
-_you must be in a parent directory with the studybuddydevelopment child folder_ 
+_you must be in a parent directory with the studybuddydevelopment child folder_
 
 ```
 ./studybuddydevelopment/scripts/activate.ps1
@@ -50,4 +54,3 @@ pip install pyqt5 pyqt5-tools
 ```
 
 4. Start Developing
-  
