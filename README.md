@@ -11,7 +11,7 @@ Project Idea: Study Buddy (Agenda App)
 - Jyle Oxcino - initial pull and commit 2023-04-26
 - Daniel Lazzaroni - initla pull and commit 2023-04-26
 - David Tran - initial pull and commit 2023-04-26
-
+- Zhou Ci Lang Yuan - initial pull and commit 2023-04-26
 ## Get Started
 
 1. Clone this repository
