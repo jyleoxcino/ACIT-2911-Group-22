@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.uic import loadUi
 
 """""
+SQLite database
+
 Event Properties
 - Title         STRING
 - Description   STRING
@@ -15,26 +17,54 @@ Event Properties
 
 """""
 
+
 class Main(QMainWindow):
     def __init__(self):
+        # Inherit all methods and properties from QMainWindow
         super(Main, self).__init__()
+        # Load UI file created in Qt Designer
         loadUi("untitled.ui", self)
-    
+
+    # Application Functions
+
+    def calendar_edit(self):
+        pass
+
     def edit_note(self):
         pass
-    
+
+    # Database Functions
+
     def create_event(self):
+        """
+        add event to database
+        SQL QUERY INSERT
+        """
         pass
-    
+
     def update_event(self):
+        """
+        modify existing event in database
+        SQL QUERY UPDATE 
+        """
         pass
-    
+
     def delete_event(self):
+        """
+        SQL QUERY DELETE
+        """
         pass
-    
+
 
 if __name__ == "__main__":
+    """
+    Loads UI and initializes studybuddy window
+    """
+    # Create QApplication Instance
     app = QApplication(sys.argv)
+    # Create Main Instance
     ui = Main()
+    # Load Main (GUI)
     ui.show()
+    # Start QApplication
     app.exec_()
