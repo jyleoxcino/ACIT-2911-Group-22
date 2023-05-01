@@ -3,6 +3,7 @@ import sqlite3
 import datetime
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.uic import loadUi
+from sqlite3 import Error
 
 """""
 SQLite database
@@ -35,6 +36,17 @@ class Main(QMainWindow):
 
     # Database Functions
 
+    def create_connection(self):
+        conn = None
+        try:
+            conn = sqlite3.connect("./database.db")
+            print(sqlite3.version)
+        except Error as e:
+            print(e)
+        finally:
+            if conn:
+                conn.close()
+            
     def create_event(self):
         """
         add event to database
@@ -60,6 +72,9 @@ if __name__ == "__main__":
     """
     Loads UI and initializes studybuddy window
     """
+    
+    
+
     # Create QApplication Instance
     app = QApplication(sys.argv)
     # Create Main Instance
@@ -68,3 +83,5 @@ if __name__ == "__main__":
     ui.show()
     # Start QApplication
     app.exec_()
+
+    
