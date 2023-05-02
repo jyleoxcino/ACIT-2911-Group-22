@@ -1,6 +1,7 @@
 import sys
 import sqlite3
 import datetime
+
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.uic import loadUi
 from sqlite3 import Error
@@ -18,6 +19,37 @@ Event Properties
 
 """""
 
+class Database_Controller():
+    def __init__(self):
+        self.path = "./database.db"
+        
+        self.conn = self.create_connection()
+        self.create_note_table()
+    
+    def create_connection(self):
+        conn = None
+        try:
+            conn = sqlite3.connect("./sqliteDB/database.db")
+            return conn
+        except Error as e:
+            print(e)
+
+        return conn
+        
+    def create_note_table(self):
+        sql_create_note_table = """ CREATE TABLE IF NOT EXISTS note(
+                                        id integer PRIMARY KEY,
+                                        description text,
+                                        begin_date text,
+                                        end_date text,
+                                        completion_status integer,
+                                        title text
+                                    ); """
+        
+        
+        if self.conn is not None:
+            c = self.conn.cursor()
+            c.execute(sql_create_note_table)
 
 class Main(QMainWindow):
     def __init__(self):
@@ -25,7 +57,8 @@ class Main(QMainWindow):
         super(Main, self).__init__()
         # Load UI file created in Qt Designer
         loadUi("untitled.ui", self)
-
+        self.connectDB = Database_Controller()
+        
     # Application Functions
 
     def calendar_edit(self):
@@ -36,17 +69,7 @@ class Main(QMainWindow):
 
     # Database Functions
 
-    def create_connection(self):
-        conn = None
-        try:
-            conn = sqlite3.connect("./database.db")
-            print(sqlite3.version)
-        except Error as e:
-            print(e)
-        finally:
-            if conn:
-                conn.close()
-            
+ 
     def create_event(self):
         """
         add event to database
@@ -83,5 +106,3 @@ if __name__ == "__main__":
     ui.show()
     # Start QApplication
     app.exec_()
-
-    
