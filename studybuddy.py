@@ -72,51 +72,13 @@ class Main(QMainWindow):
         self.pushButton_3.clicked.connect(self.edit_event)
         self.pushButton.clicked.connect(self.delete_event)
         
-        self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
+
         self.calendarWidget.activated.connect(self.view_day)
         
     # Application Functions
     def calendarDateChanged(self):
-        print("date changed")
+        pass
         
-        dateSelected = self.calendarWidget.selectedDate()
-        print(dateSelected)
-        self.labelDate_2.setText(dateSelected.toString("MMM dd"))
-        self.labelDate.setText(dateSelected.toString("MMM dd"))
-      
-        self.dateEdit.setMinimumDate(dateSelected)
-        self.dateEdit_2.setMinimumDate(dateSelected)
-        self.dateEdit.setDate(dateSelected)
-        self.dateEdit_2.setDate(dateSelected)
-        print(dateSelected.dayOfWeek())
-        
-
-        if dateSelected.dayOfWeek()== 7:
-            
-            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]) + ' 0','%Y %W %w')
-        else:
-            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]-1) + ' 0','%Y %W %w')
-        
-        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
-        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
-        
-        self.labelSunday.setText(thisWeeksSunday)
-        date_1 = datetime.strptime(thisWeeksSunday, "%B %d")
-
-        mon = (date_1 + timedelta(days=1)).strftime("%B %d")
-        tue = (date_1 + timedelta(days=2)).strftime("%B %d")
-        wed = (date_1 + timedelta(days=3)).strftime("%B %d")
-        thu = (date_1 + timedelta(days=4)).strftime("%B %d")
-        fri = (date_1 + timedelta(days=5)).strftime("%B %d")
-        sat = (date_1 + timedelta(days=6)).strftime("%B %d")
-
-        self.labelMonday.setText(mon)
-        self.labelTuesday.setText(tue)
-        self.labelWednesday.setText(wed)
-        self.labelThursday.setText(thu)
-        self.labelFriday.setText(fri)
-        self.labelSaturday.setText(sat)  
-
     def calendar_edit(self):
         pass
 
@@ -142,18 +104,71 @@ class Main(QMainWindow):
         pass
 
     def view_month(self):
+        self.buttonDay.setDisabled(False)
+        self.buttonMonth.setDisabled(True)
+        self.buttonWeek.setDisabled(False)
         self.stackedWidget.setCurrentIndex(0)
 
     def view_week(self):
-        self.stackedWidget.setCurrentIndex(3)
+        self.buttonDay.setDisabled(False)
+        self.buttonMonth.setDisabled(False)
+        self.buttonWeek.setDisabled(True)
 
+        dateSelected = self.calendarWidget.selectedDate()
+        
+        if dateSelected.dayOfWeek()== 7:
+            
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]) + ' 0','%Y %W %w')
+            self.labelMonth.setText("Week"+' '+str(dateSelected.weekNumber()[0]+1)+" of "+str(self.calendarWidget.yearShown()))
+        else:
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]-1) + ' 0','%Y %W %w')
+            self.labelMonth.setText("Week"+' '+str(dateSelected.weekNumber()[0])+" of "+str(self.calendarWidget.yearShown()))
+
+        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        
+        self.labelSunday.setText(thisWeeksSunday)
+        
+        date_1 = datetime.strptime(thisWeeksSunday, "%B %d")
+
+        mon = (date_1 + timedelta(days=1)).strftime("%B %d")
+        tue = (date_1 + timedelta(days=2)).strftime("%B %d")
+        wed = (date_1 + timedelta(days=3)).strftime("%B %d")
+        thu = (date_1 + timedelta(days=4)).strftime("%B %d")
+        fri = (date_1 + timedelta(days=5)).strftime("%B %d")
+        sat = (date_1 + timedelta(days=6)).strftime("%B %d")
+
+        self.labelMonday.setText(mon)
+        self.labelTuesday.setText(tue)
+        self.labelWednesday.setText(wed)
+        self.labelThursday.setText(thu)
+        self.labelFriday.setText(fri)
+        self.labelSaturday.setText(sat)  
+
+        self.stackedWidget.setCurrentIndex(3)
     def view_day(self):
+        self.buttonDay.setDisabled(True)
+        self.buttonMonth.setDisabled(False)
+        self.buttonWeek.setDisabled(False)
+
+        dateSelected = self.calendarWidget.selectedDate()
+  
+        self.labelDate_2.setText(dateSelected.toString("MMM dd"))
+        
         self.stackedWidget.setCurrentIndex(2)
 
     def create_event(self):
         self.stackedWidget.setCurrentIndex(1)
         
     def edit_event(self):
+        dateSelected = self.calendarWidget.selectedDate()
+        self.labelDate.setText(dateSelected.toString("MMM dd"))
+      
+        self.dateEdit.setMinimumDate(dateSelected)
+        self.dateEdit_2.setMinimumDate(dateSelected)
+        self.dateEdit.setDate(dateSelected)
+        self.dateEdit_2.setDate(dateSelected)
+       
         # when selecting an item on the QTableWidget it'll edit the note that you clicked
         self.stackedWidget.setCurrentIndex(1)
         # Grab data from database and populate qLineEdit boxes

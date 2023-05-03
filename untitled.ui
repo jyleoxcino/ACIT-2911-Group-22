@@ -48,6 +48,18 @@
         </item>
         <item>
          <widget class="QPushButton" name="buttonDay">
+          <property name="styleSheet">
+           <string notr="true">QPushButton#buttonDay:disabled {
+
+    font-weight:bold;
+	color:blue;
+	background-color: yellow;
+}
+QPushButton#buttonDay{
+
+	color:green;
+}</string>
+          </property>
           <property name="text">
            <string>Day</string>
           </property>
@@ -640,7 +652,7 @@
      <x>0</x>
      <y>0</y>
      <width>820</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
