@@ -2,7 +2,11 @@ import sys
 import sqlite3
 import datetime
 
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import *
+
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
 from PyQt5.uic import loadUi
 from sqlite3 import Error
 
@@ -59,8 +63,25 @@ class Main(QMainWindow):
         loadUi("untitled.ui", self)
         self.connectDB = Database_Controller()
         
+        self.buttonDay.clicked.connect(self.view_day)
+        self.buttonMonth.clicked.connect(self.view_month)
+        self.buttonWeek.clicked.connect(self.view_week)
+        
+        self.pushButton_2.clicked.connect(self.create_event)
+        self.pushButton_3.clicked.connect(self.edit_event)
+        self.pushButton.clicked.connect(self.delete_event)
+        
+        self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
+        self.calendarWidget.activated.connect(self.view_day)
     # Application Functions
-
+    def calendarDateChanged(self):
+        print("date changed")
+        dateSelected = self.calendarWidget.selectedDate()
+        print(dateSelected)
+        self.labelDate_2.setText(dateSelected.toString("MMM dd"))
+        self.labelDate.setText(dateSelected.toString("MMM dd"))
+        self.dateEdit.setMinimumDate(dateSelected)
+        self.dateEdit_2.setMinimumDate(dateSelected)
     def calendar_edit(self):
         pass
 
@@ -70,12 +91,7 @@ class Main(QMainWindow):
     # Database Functions
 
  
-    def create_event(self):
-        """
-        add event to database
-        SQL QUERY INSERT
-        """
-        pass
+   
 
     def update_event(self):
         """
@@ -90,6 +106,22 @@ class Main(QMainWindow):
         """
         pass
 
+    def view_month(self):
+        self.stackedWidget.setCurrentIndex(0)
+
+    def view_week(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+    def view_day(self):
+        self.stackedWidget.setCurrentIndex(2)
+
+    def create_event(self):
+        self.stackedWidget.setCurrentIndex(1)
+        
+    def edit_event(self):
+        # when selecting an item on the QTableWidget it'll edit the note that you clicked
+        self.stackedWidget.setCurrentIndex(1)
+        # Grab data from database and populate qLineEdit boxes
 
 if __name__ == "__main__":
     """
