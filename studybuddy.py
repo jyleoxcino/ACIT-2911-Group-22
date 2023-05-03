@@ -1,8 +1,9 @@
 import sys
 import sqlite3
-import datetime
-
+import time
+from time import mktime
 from PyQt5.QtWidgets import *
+from datetime import datetime, timedelta, date
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import * 
@@ -73,15 +74,49 @@ class Main(QMainWindow):
         
         self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
         self.calendarWidget.activated.connect(self.view_day)
+        
     # Application Functions
     def calendarDateChanged(self):
         print("date changed")
+        
         dateSelected = self.calendarWidget.selectedDate()
         print(dateSelected)
         self.labelDate_2.setText(dateSelected.toString("MMM dd"))
         self.labelDate.setText(dateSelected.toString("MMM dd"))
+      
         self.dateEdit.setMinimumDate(dateSelected)
         self.dateEdit_2.setMinimumDate(dateSelected)
+        self.dateEdit.setDate(dateSelected)
+        self.dateEdit_2.setDate(dateSelected)
+        print(dateSelected.dayOfWeek())
+        
+
+        if dateSelected.dayOfWeek()== 7:
+            
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]) + ' 0','%Y %W %w')
+        else:
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]-1) + ' 0','%Y %W %w')
+        
+        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        
+        self.labelSunday.setText(thisWeeksSunday)
+        date_1 = datetime.strptime(thisWeeksSunday, "%B %d")
+
+        mon = (date_1 + timedelta(days=1)).strftime("%B %d")
+        tue = (date_1 + timedelta(days=2)).strftime("%B %d")
+        wed = (date_1 + timedelta(days=3)).strftime("%B %d")
+        thu = (date_1 + timedelta(days=4)).strftime("%B %d")
+        fri = (date_1 + timedelta(days=5)).strftime("%B %d")
+        sat = (date_1 + timedelta(days=6)).strftime("%B %d")
+
+        self.labelMonday.setText(mon)
+        self.labelTuesday.setText(tue)
+        self.labelWednesday.setText(wed)
+        self.labelThursday.setText(thu)
+        self.labelFriday.setText(fri)
+        self.labelSaturday.setText(sat)  
+
     def calendar_edit(self):
         pass
 
