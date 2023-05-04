@@ -1,7 +1,13 @@
 import sys
 import sqlite3
-import datetime
-from PyQt5.QtWidgets import QMainWindow, QApplication
+import time
+from time import mktime
+from PyQt5.QtWidgets import *
+from datetime import datetime, timedelta, date
+
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
 from PyQt5.uic import loadUi
 from sqlite3 import Error
 
@@ -18,6 +24,37 @@ Event Properties
 
 """""
 
+class Database_Controller():
+    def __init__(self):
+        self.path = "./database.db"
+        
+        self.conn = self.create_connection()
+        self.create_note_table()
+    
+    def create_connection(self):
+        conn = None
+        try:
+            conn = sqlite3.connect("./sqliteDB/database.db")
+            return conn
+        except Error as e:
+            print(e)
+
+        return conn
+        
+    def create_note_table(self):
+        sql_create_note_table = """ CREATE TABLE IF NOT EXISTS note(
+                                        id integer PRIMARY KEY,
+                                        description text,
+                                        begin_date text,
+                                        end_date text,
+                                        completion_status integer,
+                                        title text
+                                    ); """
+        
+        
+        if self.conn is not None:
+            c = self.conn.cursor()
+            c.execute(sql_create_note_table)
 
 class Main(QMainWindow):
     def __init__(self):
@@ -25,9 +62,23 @@ class Main(QMainWindow):
         super(Main, self).__init__()
         # Load UI file created in Qt Designer
         loadUi("untitled.ui", self)
+        self.connectDB = Database_Controller()
+        
+        self.buttonDay.clicked.connect(self.view_day)
+        self.buttonMonth.clicked.connect(self.view_month)
+        self.buttonWeek.clicked.connect(self.view_week)
+        
+        self.pushButton_2.clicked.connect(self.create_event)
+        self.pushButton_3.clicked.connect(self.edit_event)
+        self.pushButton.clicked.connect(self.delete_event)
+        
 
+        self.calendarWidget.activated.connect(self.view_day)
+        
     # Application Functions
-
+    def calendarDateChanged(self):
+        pass
+        
     def calendar_edit(self):
         pass
 
@@ -36,23 +87,8 @@ class Main(QMainWindow):
 
     # Database Functions
 
-    def create_connection(self):
-        conn = None
-        try:
-            conn = sqlite3.connect("./database.db")
-            print(sqlite3.version)
-        except Error as e:
-            print(e)
-        finally:
-            if conn:
-                conn.close()
-            
-    def create_event(self):
-        """
-        add event to database
-        SQL QUERY INSERT
-        """
-        pass
+ 
+   
 
     def update_event(self):
         """
@@ -67,6 +103,75 @@ class Main(QMainWindow):
         """
         pass
 
+    def view_month(self):
+        self.buttonDay.setDisabled(False)
+        self.buttonMonth.setDisabled(True)
+        self.buttonWeek.setDisabled(False)
+        self.stackedWidget.setCurrentIndex(0)
+
+    def view_week(self):
+        self.buttonDay.setDisabled(False)
+        self.buttonMonth.setDisabled(False)
+        self.buttonWeek.setDisabled(True)
+
+        dateSelected = self.calendarWidget.selectedDate()
+        
+        if dateSelected.dayOfWeek()== 7:
+            
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]) + ' 0','%Y %W %w')
+            self.labelMonth.setText("Week"+' '+str(dateSelected.weekNumber()[0]+1)+" of "+str(self.calendarWidget.yearShown()))
+        else:
+            thisWeeksSunday = time.strptime(str(dateSelected.year()) + ' ' + str(dateSelected.weekNumber()[0]-1) + ' 0','%Y %W %w')
+            self.labelMonth.setText("Week"+' '+str(dateSelected.weekNumber()[0])+" of "+str(self.calendarWidget.yearShown()))
+
+        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        
+        self.labelSunday.setText(thisWeeksSunday)
+        
+        date_1 = datetime.strptime(thisWeeksSunday, "%B %d")
+
+        mon = (date_1 + timedelta(days=1)).strftime("%B %d")
+        tue = (date_1 + timedelta(days=2)).strftime("%B %d")
+        wed = (date_1 + timedelta(days=3)).strftime("%B %d")
+        thu = (date_1 + timedelta(days=4)).strftime("%B %d")
+        fri = (date_1 + timedelta(days=5)).strftime("%B %d")
+        sat = (date_1 + timedelta(days=6)).strftime("%B %d")
+
+        self.labelMonday.setText(mon)
+        self.labelTuesday.setText(tue)
+        self.labelWednesday.setText(wed)
+        self.labelThursday.setText(thu)
+        self.labelFriday.setText(fri)
+        self.labelSaturday.setText(sat)  
+
+        self.stackedWidget.setCurrentIndex(3)
+    def view_day(self):
+        self.buttonDay.setDisabled(True)
+        self.buttonMonth.setDisabled(False)
+        self.buttonWeek.setDisabled(False)
+
+        dateSelected = self.calendarWidget.selectedDate()
+  
+        self.labelDate_2.setText(dateSelected.toString("MMM dd"))
+        
+        self.stackedWidget.setCurrentIndex(2)
+
+    def create_event(self):
+        self.stackedWidget.setCurrentIndex(1)
+        
+    def edit_event(self):
+        dateSelected = self.calendarWidget.selectedDate()
+        self.labelDate.setText(dateSelected.toString("MMM dd"))
+      
+        self.dateEdit.setMinimumDate(dateSelected)
+        self.dateEdit_2.setMinimumDate(dateSelected)
+        self.dateEdit.setDate(dateSelected)
+        self.dateEdit_2.setDate(dateSelected)
+       
+        # when selecting an item on the QTableWidget it'll edit the note that you clicked
+        self.stackedWidget.setCurrentIndex(1)
+        # Grab data from database and populate qLineEdit boxes
 
 if __name__ == "__main__":
     """
@@ -83,5 +188,3 @@ if __name__ == "__main__":
     ui.show()
     # Start QApplication
     app.exec_()
-
-    
