@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>858</width>
-    <height>648</height>
+    <width>1001</width>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,8 @@
    <property name="styleSheet">
     <string notr="true">QWidget{
   font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-serif;
+
+
 }
 .QPushButton {
   background-color: #e1ecf4;
@@ -35,6 +37,7 @@
 	font-weight: bold;
 	color: #2b5777
 }
+
 </string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -163,7 +166,7 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>600</height>
+        <height>575</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -188,6 +191,7 @@
           <property name="font">
            <font>
             <family>-apple-system</family>
+            <pointsize>8</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -198,6 +202,7 @@
 selection-background-color: #042944; 
 selection-color: white;
 selection-border:10px solid red;
+font-size: 16px;
 
 }
 QCalendarWidget QTableView{
@@ -451,6 +456,9 @@ background-color:lightblue;
           <height>451</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <column>
          <property name="text">
           <string>Title</string>
@@ -635,7 +643,7 @@ background-color:lightblue;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>858</width>
+     <width>1001</width>
      <height>26</height>
     </rect>
    </property>
