@@ -173,7 +173,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="monthPage">
        <property name="styleSheet">
@@ -262,188 +262,204 @@ background-color:lightblue;
        </layout>
       </widget>
       <widget class="QWidget" name="editPage">
-       <widget class="QLabel" name="labelTitle">
+       <widget class="QFrame" name="frame_2">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>30</y>
-          <width>55</width>
-          <height>16</height>
+          <y>0</y>
+          <width>1421</width>
+          <height>811</height>
          </rect>
         </property>
-        <property name="text">
-         <string>Title</string>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
         </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEditTitle">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>50</y>
-          <width>690</width>
-          <height>22</height>
-         </rect>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEditTags">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>100</y>
-          <width>690</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelTags">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>80</y>
-          <width>55</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tags</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelStartDate">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>130</y>
-          <width>91</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Start Date</string>
-        </property>
-       </widget>
-       <widget class="QDateEdit" name="dateEdit">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>150</y>
-          <width>110</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelEndDate">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>130</y>
-          <width>101</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>End Date</string>
-        </property>
-       </widget>
-       <widget class="QDateEdit" name="dateEdit_2">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>150</y>
-          <width>110</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSlider">
-        <property name="geometry">
-         <rect>
-          <x>630</x>
-          <y>150</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelStatus">
-        <property name="geometry">
-         <rect>
-          <x>630</x>
-          <y>130</y>
-          <width>55</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Status</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelDescription">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>190</y>
-          <width>131</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Description</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="buttonCancel">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>500</y>
-          <width>90</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Cancel</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="buttonSubmit">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>500</y>
-          <width>90</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Submit</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelDate">
-        <property name="geometry">
-         <rect>
-          <x>320</x>
-          <y>10</y>
-          <width>101</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Date</string>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>230</y>
-          <width>691</width>
-          <height>251</height>
-         </rect>
-        </property>
+        <widget class="QLineEdit" name="lineEditTitle">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>50</y>
+           <width>690</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelDescription">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>190</y>
+           <width>131</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Description</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="textEdit">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>230</y>
+           <width>691</width>
+           <height>251</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelDate">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>10</y>
+           <width>101</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Date</string>
+         </property>
+        </widget>
+        <widget class="QDateEdit" name="dateEdit">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>150</y>
+           <width>110</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelStatus">
+         <property name="geometry">
+          <rect>
+           <x>630</x>
+           <y>130</y>
+           <width>55</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </widget>
+        <widget class="QSlider" name="horizontalSlider">
+         <property name="geometry">
+          <rect>
+           <x>630</x>
+           <y>150</y>
+           <width>51</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="maximum">
+          <number>1</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelTags">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>80</y>
+           <width>55</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Tags</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="buttonSubmit">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>500</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Submit</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditTags">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>100</y>
+           <width>690</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="buttonCancel">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>500</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelStartDate">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>130</y>
+           <width>91</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Date</string>
+         </property>
+        </widget>
+        <widget class="QDateEdit" name="dateEdit_2">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>150</y>
+           <width>110</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelTitle">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>30</y>
+           <width>55</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Title</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelEndDate">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>130</y>
+           <width>101</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>End Date</string>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="dayPage">
@@ -499,7 +515,7 @@ background-color:lightblue;
          </rect>
         </property>
         <property name="text">
-         <string>Cancel</string>
+         <string>Back</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelDate_2">
@@ -616,7 +632,7 @@ background-color:lightblue;
         <item row="3" column="6">
          <widget class="QPushButton" name="buttonCancel_3">
           <property name="text">
-           <string>Cancel</string>
+           <string>Back</string>
           </property>
          </widget>
         </item>

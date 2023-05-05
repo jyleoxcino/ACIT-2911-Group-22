@@ -121,7 +121,7 @@ class Main(QMainWindow):
         # Inherit all methods and properties from QMainWindow
         super(Main, self).__init__()
         # Load UI file created in Qt Designer
-        loadUi("untitled.ui", self)
+        loadUi("studybuddy.ui", self)
         self.connectDB = Database_Controller()
 
         self.buttonDay.clicked.connect(self.view_day)
@@ -134,6 +134,8 @@ class Main(QMainWindow):
 
         self.buttonSubmit.clicked.connect(self.event_manager)
         self.buttonCancel.clicked.connect(self.view_day)
+        self.buttonCancel_2.clicked.connect(self.view_month)
+        self.buttonCancel_3.clicked.connect(self.view_month)
 
         self.calendarWidget.clicked.connect(self.select_date)
         self.calendarWidget.activated.connect(self.view_day)
