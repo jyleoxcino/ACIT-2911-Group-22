@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1001</width>
-    <height>623</height>
+    <width>1575</width>
+    <height>859</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -173,7 +173,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="monthPage">
        <property name="styleSheet">
@@ -387,23 +387,13 @@ background-color:lightblue;
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>180</y>
+          <y>190</y>
           <width>131</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
          <string>Description</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEditDescription">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>200</y>
-          <width>690</width>
-          <height>321</height>
-         </rect>
         </property>
        </widget>
        <widget class="QPushButton" name="buttonCancel">
@@ -437,12 +427,22 @@ background-color:lightblue;
          <rect>
           <x>320</x>
           <y>10</y>
-          <width>55</width>
-          <height>16</height>
+          <width>101</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="text">
          <string>Date</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>230</y>
+          <width>691</width>
+          <height>251</height>
+         </rect>
         </property>
        </widget>
       </widget>
@@ -576,60 +576,137 @@ background-color:lightblue;
           </property>
          </widget>
         </item>
-        <item row="1" column="4">
+        <item row="1" column="3">
          <widget class="QLabel" name="labelWednesday">
           <property name="text">
            <string>Wednesday #</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
+        <item row="1" column="4">
          <widget class="QLabel" name="labelThursday">
           <property name="text">
            <string>Thursday #</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="6">
+        <item row="1" column="5">
          <widget class="QLabel" name="labelFriday">
           <property name="text">
            <string>Friday #</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="7">
+        <item row="1" column="6">
          <widget class="QLabel" name="labelSaturday">
           <property name="text">
            <string>Saturday #</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QTableView" name="tableviewSunday"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QTableView" name="tableviewMonday"/>
-        </item>
-        <item row="2" column="2" colspan="2">
-         <widget class="QTableView" name="tableviewTuesday"/>
-        </item>
-        <item row="2" column="4">
-         <widget class="QTableView" name="tableviewWednesday"/>
-        </item>
-        <item row="2" column="5">
-         <widget class="QTableView" name="tableviewThursday"/>
-        </item>
-        <item row="2" column="6">
-         <widget class="QTableView" name="tableviewFriday"/>
-        </item>
-        <item row="2" column="7">
-         <widget class="QTableView" name="tableviewSaturday"/>
-        </item>
-        <item row="3" column="7">
+        <item row="3" column="6">
          <widget class="QPushButton" name="buttonCancel_3">
           <property name="text">
            <string>Cancel</string>
           </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTableWidget" name="tableviewSunday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QTableWidget" name="tableviewMonday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QTableWidget" name="tableviewTuesday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QTableWidget" name="tableviewWednesday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QTableWidget" name="tableviewThursday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QTableWidget" name="tableviewFriday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="6">
+         <widget class="QTableWidget" name="tableviewSaturday">
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -643,8 +720,8 @@ background-color:lightblue;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1001</width>
-     <height>26</height>
+     <width>1575</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
