@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>StudyBuddy</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -173,7 +173,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="monthPage">
        <property name="styleSheet">
@@ -399,8 +399,8 @@ background-color:lightblue;
        <widget class="QPushButton" name="buttonCancel">
         <property name="geometry">
          <rect>
-          <x>600</x>
-          <y>530</y>
+          <x>0</x>
+          <y>500</y>
           <width>90</width>
           <height>30</height>
          </rect>
@@ -412,8 +412,8 @@ background-color:lightblue;
        <widget class="QPushButton" name="buttonSubmit">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>530</y>
+          <x>600</x>
+          <y>500</y>
           <width>90</width>
           <height>30</height>
          </rect>
@@ -458,6 +458,15 @@ background-color:lightblue;
         </property>
         <property name="styleSheet">
          <string notr="true"/>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
         <column>
          <property name="text">
@@ -721,22 +730,9 @@ background-color:lightblue;
      <x>0</x>
      <y>0</y>
      <width>1575</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
   </widget>
   <action name="actionExit">
    <property name="text">
