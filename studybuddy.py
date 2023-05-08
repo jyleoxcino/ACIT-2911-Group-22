@@ -57,12 +57,15 @@ class Database_Controller():
             c.execute(sql_create_note_table)
 
     def query_week(self, week_start):
-        query = "SELECT * FROM NOTE WHERE end_date between " + week_start.strftime(
-            "%Y/%m/%d")+" and " + (week_start + timedelta(days=6)).strftime("%Y/%m/%d")
+        query = """SELECT * FROM NOTE WHERE date(end_date) between ? and ?"""
 
         if self.conn is not None:
             c = self.conn.cursor()
-            data = c.execute(query)
+            params = (week_start.strftime(
+            "%Y-%m-%d"),(week_start + timedelta(days=6)).strftime("%Y-%m-%d"))
+            print(params)
+            print(query)
+            data = c.execute(query,params)
 
         return data
 
@@ -172,14 +175,14 @@ class Main(QMainWindow):
             )) + ' ' + str(self.selected_date.weekNumber()[0]-1) + ' 0', '%Y %W %w')
 
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
-        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
-        return datetime.strptime(thisWeeksSunday, "%B %d")
+        return datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
 
     def select_date(self):
         self.selected_date = self.calendarWidget.selectedDate()
         self.selected_date = str(self.selected_date.year(
-        )) + '/'+str(self.selected_date.month())+'/'+str(self.selected_date.day())
+        )) + '-'+str(self.selected_date.month())+'-'+str(self.selected_date.day())
 
     def set_event_defaults(self):
         self.lineEditTags.clear()
@@ -291,7 +294,7 @@ class Main(QMainWindow):
         for task in self.weekly_data:
 
             end_date_formatted = datetime.strptime(
-                task['end_date'], "%m/%d/%Y").strftime("%B %d")
+                task['end_date'], "%Y-%m-%d").strftime("%B %d")
 
             if end_date_formatted == self.sun:
                 self.sun_list.append(task)
@@ -443,8 +446,8 @@ class Main(QMainWindow):
        
         # Grab data from database and populate qLineEdit boxes
         cur = self.connectDB.conn.cursor()
-        query = """SELECT * FROM note where end_date = ?"""
-        params = (dateSelected.toString("M/d/yyyy"), )
+        query = """SELECT * FROM note where date(end_date) = ?"""
+        params = (dateSelected.toString("yyyy-MM-dd"), )
         row_count = 1
         tablerow = 0
         for row in cur.execute(query, params):
