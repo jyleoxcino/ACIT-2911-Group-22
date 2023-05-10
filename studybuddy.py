@@ -194,6 +194,9 @@ class Main(QMainWindow):
             }
             self.weekly_data.append(dic)
 
+
+    ## VIEWS
+
     def view_day(self):
         self.populate_daily()
         self.buttonNavigationCalendarDay.setDisabled(True)
@@ -285,7 +288,6 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleAdd.setDisabled(False)
         self.buttonNavigationSettings.setDisabled(False)
 
-
     def view_settings(self):
         self.stackedWidgetViews.setCurrentIndex(7)
         self.buttonNavigationCalendarDay.setDisabled(False)
@@ -296,6 +298,72 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleAdd.setDisabled(False)
         self.buttonNavigationSettings.setDisabled(True)
 
+    ## EVENTS
+
+    def create_event(self):
+        self.set_event_defaults()
+        self.edit_flag = 0
+        dateSelected = self.calendarWidget.selectedDate()
+        self.labelModifyEventDate.setText(dateSelected.toString("MMM dd"))
+
+        self.dataModifyEventStartDate.setMinimumDate(dateSelected)
+        self.dataModifyEventEndDate.setMinimumDate(dateSelected)
+        self.dataModifyEventStartDate.setDate(dateSelected)
+        self.dataModifyEventEndDate.setDate(dateSelected)
+        self.stackedWidgetViews.setCurrentIndex(1)
+
+        cur = self.connectDB.conn.cursor()
+        query = 'SELECT * FROM note'
+
+        row_count = 1
+        tablerow = 0
+        for row in cur.execute(query):
+            self.tableViewDaily.setRowCount(row_count)
+
+            self.tableViewDaily.setItem(tablerow, 0, QTableWidgetItem(row[5]))
+            self.tableViewDaily.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+            self.tableViewDaily.setItem(tablerow, 2, QTableWidgetItem(row[3]))
+            self.tableViewDaily.setItem(tablerow, 3, QTableWidgetItem(row[4]))
+
+            tablerow += 1
+            row_count += 1
+
+    def edit_event(self):
+        if len(self.tableViewDaily.selectedItems()) == 0:
+            return
+
+        self.edit_flag = 1
+        self.stackedWidgetViews.setCurrentIndex(1)
+        # when selecting an item on the QTableWidget it'll edit the note that you clicked
+        cur = self.connectDB.conn.cursor()
+        title = self.tableViewDaily.selectedItems()[0].text()
+        sql = """SELECT * FROM note WHERE title = ?"""
+        values = (title, )
+        row_count = 1
+        tablerow = 0
+        for row in cur.execute(sql, values):
+            self.dataModifyEventTags.setText("placeholder")
+            self.dataModifyEventTitle.setText(row[5])
+            self.dataModifyEventDescription.setText(row[1])
+            self.dataModifyEventStatus.setValue(row[4])
+            tablerow += 1
+            row_count += 1
+
+    def delete_event(self):
+        title = self.tableViewDaily.selectedItems()[0].text()
+        self.connectDB.delete_event(title)
+        self.populate_daily()
+
+    def event_manager(self):
+        if self.edit_flag == 0:
+            self.connectDB.create_event(self.get_event_data())
+        elif self.edit_flag == 1:
+            self.connectDB.update_event(self.get_event_data())
+        self.set_event_defaults()
+        self.populate_daily()
+
+    ## SCHEDULE
+
     def create_schedule(self):
         self.stackedWidgetViews.setCurrentIndex(6)
         self.buttonNavigationCalendarDay.setDisabled(False)
@@ -305,6 +373,14 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleView.setDisabled(False)
         self.buttonNavigationScheduleAdd.setDisabled(True)
         self.buttonNavigationSettings.setDisabled(False)
+
+    def edit_schedule(self):
+        pass
+
+    def delete_schedule(self):
+        pass
+
+    ## OTHER
 
     def get_sunday(self):
 
@@ -334,14 +410,6 @@ class Main(QMainWindow):
         self.dataModifyEventStartDate.clear()
         self.dataModifyEventEndDate.clear()
         self.dataModifyEventStatus.setValue(0)
-
-    def event_manager(self):
-        if self.edit_flag == 0:
-            self.connectDB.create_event(self.get_event_data())
-        elif self.edit_flag == 1:
-            self.connectDB.update_event(self.get_event_data())
-        self.set_event_defaults()
-        self.populate_daily()
 
     def get_event_data(self):
 
@@ -485,34 +553,6 @@ class Main(QMainWindow):
             tablerow += 1
             row_count += 1
 
-    def create_event(self):
-        self.set_event_defaults()
-        self.edit_flag = 0
-        dateSelected = self.calendarWidget.selectedDate()
-        self.labelModifyEventDate.setText(dateSelected.toString("MMM dd"))
-
-        self.dataModifyEventStartDate.setMinimumDate(dateSelected)
-        self.dataModifyEventEndDate.setMinimumDate(dateSelected)
-        self.dataModifyEventStartDate.setDate(dateSelected)
-        self.dataModifyEventEndDate.setDate(dateSelected)
-        self.stackedWidgetViews.setCurrentIndex(1)
-
-        cur = self.connectDB.conn.cursor()
-        query = 'SELECT * FROM note'
-
-        row_count = 1
-        tablerow = 0
-        for row in cur.execute(query):
-            self.tableViewDaily.setRowCount(row_count)
-
-            self.tableViewDaily.setItem(tablerow, 0, QTableWidgetItem(row[5]))
-            self.tableViewDaily.setItem(tablerow, 1, QTableWidgetItem(row[1]))
-            self.tableViewDaily.setItem(tablerow, 2, QTableWidgetItem(row[3]))
-            self.tableViewDaily.setItem(tablerow, 3, QTableWidgetItem(row[4]))
-
-            tablerow += 1
-            row_count += 1
-
     def populate_daily(self):
         """
         SQL QUERY DELETE
@@ -540,37 +580,10 @@ class Main(QMainWindow):
                 tablerow += 1
                 row_count += 1
 
-    def edit_event(self):
-        if len(self.tableViewDaily.selectedItems()) == 0:
-            return
-
-        self.edit_flag = 1
-        self.stackedWidgetViews.setCurrentIndex(1)
-        # when selecting an item on the QTableWidget it'll edit the note that you clicked
-        cur = self.connectDB.conn.cursor()
-        title = self.tableViewDaily.selectedItems()[0].text()
-        sql = """SELECT * FROM note WHERE title = ?"""
-        values = (title, )
-        row_count = 1
-        tablerow = 0
-        for row in cur.execute(sql, values):
-            self.dataModifyEventTags.setText("placeholder")
-            self.dataModifyEventTitle.setText(row[5])
-            self.dataModifyEventDescription.setText(row[1])
-            self.dataModifyEventStatus.setValue(row[4])
-            tablerow += 1
-            row_count += 1
-        
-    def delete_event(self):
-        title = self.tableViewDaily.selectedItems()[0].text()
-        self.connectDB.delete_event(title)
-        self.populate_daily()
-
 if __name__ == "__main__":
     """
     Loads UI and initializes studybuddy window
     """
-
     # Create QApplication Instance
     app = QApplication(sys.argv)
     # Create Main Instance
