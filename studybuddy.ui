@@ -154,7 +154,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>20</y>
+            <y>30</y>
             <width>101</width>
             <height>51</height>
            </rect>
@@ -186,7 +186,7 @@
            <string>Schedule</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="frameNavigationScheduleView">
+         <widget class="QPushButton" name="buttonNavigationScheduleView">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -199,7 +199,7 @@
            <string>View</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="frameNavigationScheduleAdd">
+         <widget class="QPushButton" name="buttonNavigationScheduleAdd">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -234,7 +234,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="buttonNavigationSeetings">
+           <widget class="QPushButton" name="buttonNavigationSettings">
             <property name="text">
              <string>Settings</string>
             </property>
@@ -377,7 +377,7 @@ background-color:lightblue;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLineEdit" name="lineEditTags">
+         <widget class="QLineEdit" name="dataModifyEventTags">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -387,7 +387,7 @@ background-color:lightblue;
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="lineEditTitle">
+         <widget class="QLineEdit" name="dataModifyEventTitle">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -397,7 +397,7 @@ background-color:lightblue;
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="labelTags">
+         <widget class="QLabel" name="labelModifyEventTags">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -410,7 +410,7 @@ background-color:lightblue;
            <string>Tags</string>
           </property>
          </widget>
-         <widget class="QLabel" name="labelDate">
+         <widget class="QLabel" name="labelModifyEventDate">
           <property name="geometry">
            <rect>
             <x>330</x>
@@ -423,7 +423,7 @@ background-color:lightblue;
            <string>Date</string>
           </property>
          </widget>
-         <widget class="QLabel" name="labelTitle">
+         <widget class="QLabel" name="labelModifyEventTitle">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -436,7 +436,7 @@ background-color:lightblue;
            <string>Title</string>
           </property>
          </widget>
-         <widget class="QSlider" name="horizontalSlider">
+         <widget class="QSlider" name="dataModifyEventStatus">
           <property name="geometry">
            <rect>
             <x>650</x>
@@ -452,7 +452,7 @@ background-color:lightblue;
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit">
+         <widget class="QDateEdit" name="dataModifyEventStartDate">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -462,7 +462,7 @@ background-color:lightblue;
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="labelStatus">
+         <widget class="QLabel" name="labelModifyEventStatus">
           <property name="geometry">
            <rect>
             <x>650</x>
@@ -475,7 +475,7 @@ background-color:lightblue;
            <string>Status</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_2">
+         <widget class="QDateEdit" name="dataModifyEventEndDate">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -485,7 +485,7 @@ background-color:lightblue;
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="labelEndDate">
+         <widget class="QLabel" name="labelModifyEventEndDate">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -498,7 +498,7 @@ background-color:lightblue;
            <string>End Date</string>
           </property>
          </widget>
-         <widget class="QLabel" name="labelStartDate">
+         <widget class="QLabel" name="labelModifyEventStartDate">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -527,7 +527,7 @@ background-color:lightblue;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QTextEdit" name="dataModifyEventDescription">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -537,7 +537,7 @@ background-color:lightblue;
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="labelDescription">
+         <widget class="QLabel" name="labelModifyEventDescription">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -566,7 +566,7 @@ background-color:lightblue;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QPushButton" name="buttonCancel">
+         <widget class="QPushButton" name="buttonModifyEventCancel">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -579,7 +579,7 @@ background-color:lightblue;
            <string>Cancel</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonSubmit">
+         <widget class="QPushButton" name="buttonModifyEventSubmit">
           <property name="geometry">
            <rect>
             <x>650</x>
@@ -644,7 +644,7 @@ background-color:lightblue;
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="buttonViewDailyCancel">
+       <widget class="QPushButton" name="buttonViewDailyBack">
         <property name="geometry">
          <rect>
           <x>600</x>
@@ -1017,7 +1017,39 @@ background-color:lightblue;
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="pageSchedule">
+      <widget class="QWidget" name="pageViewSchedules">
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>1271</width>
+          <height>601</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string>Title</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Tags</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Start Date</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>End Date</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pageModifySchedule">
        <widget class="QFrame" name="frameSchedule">
         <property name="geometry">
          <rect>
@@ -1280,7 +1312,7 @@ background-color:lightblue;
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="pageSettings">
+      <widget class="QWidget" name="pageViewSettings">
        <widget class="QFrame" name="frameSettings">
         <property name="geometry">
          <rect>
@@ -1341,7 +1373,7 @@ background-color:lightblue;
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="checkBoxHolidayAPI">
             <property name="geometry">
              <rect>
               <x>10</x>
@@ -1377,7 +1409,7 @@ background-color:lightblue;
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <widget class="QCheckBox" name="checkBox_2">
+           <widget class="QCheckBox" name="checkBoxSettingsEventID">
             <property name="geometry">
              <rect>
               <x>10</x>
