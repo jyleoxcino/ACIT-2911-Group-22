@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>StudyBuddy</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="StudyBuddyMainWidget">
    <property name="styleSheet">
     <string notr="true">QWidget{
   font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-serif;
@@ -42,7 +42,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QFrame" name="navigationFrame">
+     <widget class="QFrame" name="frameNavigation">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -51,7 +51,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QFrame" name="navigationFrame1">
+        <widget class="QFrame" name="frameNavigationCalendar">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -72,7 +72,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="labelCalendar">
+         <widget class="QLabel" name="labelNavigationCalendar">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -85,7 +85,7 @@
            <string>Calendar</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonDay">
+         <widget class="QPushButton" name="buttonNavigationCalendarDay">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -101,7 +101,7 @@
            <string>Day</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonWeek">
+         <widget class="QPushButton" name="buttonNavigationCalendarWeek">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -114,7 +114,7 @@
            <string>Week</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonMonth">
+         <widget class="QPushButton" name="buttonNavigationCalendarMonth">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -137,7 +137,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="labelNavigationSearch">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -150,7 +150,7 @@
            <string>Search</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonMonth_2">
+         <widget class="QPushButton" name="buttonNavigationSearch">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -173,7 +173,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="labelNavigationSchedule">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -186,7 +186,7 @@
            <string>Schedule</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonMonth_3">
+         <widget class="QPushButton" name="frameNavigationScheduleView">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -199,7 +199,7 @@
            <string>View</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonMonth_4">
+         <widget class="QPushButton" name="frameNavigationScheduleAdd">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -215,7 +215,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="navigationFrame3">
+        <widget class="QFrame" name="frameNavigationSettings">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -224,7 +224,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelNavigationSettings">
             <property name="text">
              <string>Help</string>
             </property>
@@ -234,7 +234,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_8">
+           <widget class="QPushButton" name="buttonNavigationSeetings">
             <property name="text">
              <string>Settings</string>
             </property>
@@ -247,7 +247,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="stackedWidgetViews">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -258,9 +258,9 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>5</number>
       </property>
-      <widget class="QWidget" name="monthPage">
+      <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -304,7 +304,7 @@ background-color:lightblue;
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
+         <widget class="QFrame" name="frameMonthWeeklyView">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -325,14 +325,14 @@ background-color:lightblue;
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="labelMonthWeeklyView">
              <property name="text">
               <string>Weekly View</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QListView" name="listView">
+            <widget class="QTableWidget" name="tableMonthWeeklyView">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -346,8 +346,8 @@ background-color:lightblue;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="editPage">
-       <widget class="QFrame" name="frame_2">
+      <widget class="QWidget" name="pageModifyEvent">
+       <widget class="QFrame" name="frameModifyEvent">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -362,7 +362,7 @@ background-color:lightblue;
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QFrame" name="frame_3">
+        <widget class="QFrame" name="frameModifyEventUpper">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -512,7 +512,7 @@ background-color:lightblue;
           </property>
          </widget>
         </widget>
-        <widget class="QFrame" name="frame_4">
+        <widget class="QFrame" name="frameModifyEventMiddle">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -551,7 +551,7 @@ background-color:lightblue;
           </property>
          </widget>
         </widget>
-        <widget class="QFrame" name="frame_5">
+        <widget class="QFrame" name="frameModifyEventLower">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -595,14 +595,14 @@ background-color:lightblue;
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="dayPage">
+      <widget class="QWidget" name="pageViewDaily">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>1</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="tableViewDaily">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -644,7 +644,7 @@ background-color:lightblue;
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="buttonCancel_2">
+       <widget class="QPushButton" name="buttonViewDailyCancel">
         <property name="geometry">
          <rect>
           <x>600</x>
@@ -657,7 +657,7 @@ background-color:lightblue;
          <string>Back</string>
         </property>
        </widget>
-       <widget class="QLabel" name="labelDate_2">
+       <widget class="QLabel" name="labelViewDailyDate">
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -670,7 +670,7 @@ background-color:lightblue;
          <string>Date</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="buttonViewDailyDelete">
         <property name="geometry">
          <rect>
           <x>600</x>
@@ -683,7 +683,7 @@ background-color:lightblue;
          <string>Delete</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="buttonViewDailyAdd">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -696,7 +696,7 @@ background-color:lightblue;
          <string>Add</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="buttonViewDailyEdit">
         <property name="geometry">
          <rect>
           <x>100</x>
@@ -710,7 +710,7 @@ background-color:lightblue;
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="pageViewWeekly">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="3" colspan="3">
          <widget class="QLabel" name="labelMonth">
@@ -769,7 +769,7 @@ background-color:lightblue;
          </widget>
         </item>
         <item row="3" column="6">
-         <widget class="QPushButton" name="buttonCancel_3">
+         <widget class="QPushButton" name="buttonViewWeeklyCancel">
           <property name="text">
            <string>Back</string>
           </property>
@@ -875,7 +875,7 @@ background-color:lightblue;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pageSearch">
+      <widget class="QWidget" name="pageViewSearch">
        <widget class="QFrame" name="frameSearch">
         <property name="geometry">
          <rect>
@@ -1043,7 +1043,7 @@ background-color:lightblue;
           </rect>
          </property>
         </widget>
-        <widget class="QLabel" name="labelDescription_4">
+        <widget class="QLabel" name="labelScheduleDescription">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -1187,7 +1187,7 @@ background-color:lightblue;
           <string>End Date</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_3">
+        <widget class="QCheckBox" name="checkScheduleSunday">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -1200,7 +1200,7 @@ background-color:lightblue;
           <string>Sunday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_4">
+        <widget class="QCheckBox" name="checkScheduleMonday">
          <property name="geometry">
           <rect>
            <x>70</x>
@@ -1213,7 +1213,7 @@ background-color:lightblue;
           <string>Monday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_5">
+        <widget class="QCheckBox" name="checkScheduleTuesday">
          <property name="geometry">
           <rect>
            <x>140</x>
@@ -1226,7 +1226,7 @@ background-color:lightblue;
           <string>Tuesday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_6">
+        <widget class="QCheckBox" name="checkScheduleWednesday">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -1239,7 +1239,7 @@ background-color:lightblue;
           <string>Wednesday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_7">
+        <widget class="QCheckBox" name="checkScheduleThursday">
          <property name="geometry">
           <rect>
            <x>310</x>
@@ -1252,7 +1252,7 @@ background-color:lightblue;
           <string>Thursday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_8">
+        <widget class="QCheckBox" name="checkScheduleFriday">
          <property name="geometry">
           <rect>
            <x>390</x>
@@ -1265,7 +1265,7 @@ background-color:lightblue;
           <string>Friday</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="checkBox_9">
+        <widget class="QCheckBox" name="checkScheduleSaturday">
          <property name="geometry">
           <rect>
            <x>450</x>
