@@ -30,7 +30,7 @@ class Database_Controller():
         self.path = "./database.db"
 
         self.conn = self.create_connection()
-        self.create_note_table()
+        self.create_tables()
 
     def create_connection(self):
         conn = None
@@ -40,9 +40,7 @@ class Database_Controller():
         except Error as e:
             print(e)
 
-        return conn
-
-    def create_note_table(self):
+    def create_tables(self):
         sql_queries = """
             CREATE TABLE IF NOT EXISTS events (
                 event_id INTEGER PRIMARY KEY,
@@ -50,7 +48,7 @@ class Database_Controller():
                 description TEXT,
                 start_date DATE,
                 end_date DATE,
-                completion_status INTEGER
+                completion_status BOOLEAN
             );
             CREATE TABLE IF NOT EXISTS tags (
                 tag_id INTEGER PRIMARY KEY,
@@ -79,12 +77,13 @@ class Database_Controller():
                 PRIMARY KEY (schedule_id, tag_id)
             );
         """
+
         with self.conn:
             c = self.conn.cursor()
             c.executescript(sql_queries)
 
     def query_week(self, week_start):
-        query = "SELECT * FROM NOTE WHERE end_date between " + week_start.strftime(
+        query = "SELECT * FROM events WHERE end_date between " + week_start.strftime(
             "%Y/%m/%d")+" and " + (week_start + timedelta(days=6)).strftime("%Y/%m/%d")
 
         if self.conn is not None:
@@ -106,7 +105,7 @@ class Database_Controller():
         end_date = self.data['end_date']
         status = self.data['status']
 
-        sql = """INSERT INTO note(description,start_date,end_date,completion_status, title) VALUES(?,?,?,?,?);"""
+        sql = """INSERT INTO events(description,start_date,end_date,completion_status, title) VALUES(?,?,?,?,?);"""
         params = (description, start_date, end_date, status, title)
 
         c = self.conn.cursor()
@@ -115,7 +114,7 @@ class Database_Controller():
 
     def delete_event(self, data):
         c = self.conn.cursor()
-        deleteQuery = """DELETE FROM note WHERE title = ?"""
+        deleteQuery = """DELETE FROM events WHERE title = ?"""
         values = (data, )
         c.execute(deleteQuery, values)
         self.conn.commit()
@@ -134,7 +133,7 @@ class Database_Controller():
         end_date = self.data['end_date']
         status = self.data['status']
 
-        sql = """UPDATE note SET description = ?, start_date= ?,end_date = ?,completion_status = ?,title = ? WHERE title = ? """
+        sql = """UPDATE events SET description = ?, start_date= ?,end_date = ?,completion_status = ?,title = ? WHERE title = ? """
 
         params = (description, start_date, end_date, status, title, title)
 
@@ -340,7 +339,7 @@ class Main(QMainWindow):
         self.stackedWidgetViews.setCurrentIndex(1)
 
         cur = self.connectDB.conn.cursor()
-        query = 'SELECT * FROM note'
+        query = 'SELECT * FROM events'
 
         row_count = 1
         tablerow = 0
@@ -361,10 +360,10 @@ class Main(QMainWindow):
 
         self.edit_flag = 1
         self.stackedWidgetViews.setCurrentIndex(1)
-        # when selecting an item on the QTableWidget it'll edit the note that you clicked
+        # when selecting an item on the QTableWidget it'll edit the events that you clicked
         cur = self.connectDB.conn.cursor()
         title = self.tableViewDaily.selectedItems()[0].text()
-        sql = """SELECT * FROM note WHERE title = ?"""
+        sql = """SELECT * FROM events WHERE title = ?"""
         values = (title, )
         row_count = 1
         tablerow = 0
@@ -591,7 +590,7 @@ class Main(QMainWindow):
 
         # Grab data from database and populate qLineEdit boxes
         cur = self.connectDB.conn.cursor()
-        query = """SELECT * FROM note where end_date = ?"""
+        query = """SELECT * FROM events where end_date = ?"""
         params = (dateSelected.toString("M/d/yyyy"), )
         row_count = 1
         tablerow = 0
