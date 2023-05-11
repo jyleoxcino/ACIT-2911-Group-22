@@ -258,7 +258,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -1248,9 +1248,9 @@ background-color:lightblue;
         <widget class="QCheckBox" name="checkScheduleTuesday">
          <property name="geometry">
           <rect>
-           <x>140</x>
+           <x>150</x>
            <y>140</y>
-           <width>70</width>
+           <width>81</width>
            <height>17</height>
           </rect>
          </property>
@@ -1261,9 +1261,9 @@ background-color:lightblue;
         <widget class="QCheckBox" name="checkScheduleWednesday">
          <property name="geometry">
           <rect>
-           <x>210</x>
+           <x>230</x>
            <y>140</y>
-           <width>81</width>
+           <width>91</width>
            <height>17</height>
           </rect>
          </property>
@@ -1274,9 +1274,9 @@ background-color:lightblue;
         <widget class="QCheckBox" name="checkScheduleThursday">
          <property name="geometry">
           <rect>
-           <x>310</x>
+           <x>330</x>
            <y>140</y>
-           <width>70</width>
+           <width>81</width>
            <height>17</height>
           </rect>
          </property>
@@ -1287,7 +1287,7 @@ background-color:lightblue;
         <widget class="QCheckBox" name="checkScheduleFriday">
          <property name="geometry">
           <rect>
-           <x>390</x>
+           <x>410</x>
            <y>140</y>
            <width>70</width>
            <height>17</height>
@@ -1300,9 +1300,9 @@ background-color:lightblue;
         <widget class="QCheckBox" name="checkScheduleSaturday">
          <property name="geometry">
           <rect>
-           <x>450</x>
+           <x>470</x>
            <y>140</y>
-           <width>70</width>
+           <width>81</width>
            <height>17</height>
           </rect>
          </property>
@@ -1499,7 +1499,7 @@ background-color:lightblue;
      <x>0</x>
      <y>0</y>
      <width>1486</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
