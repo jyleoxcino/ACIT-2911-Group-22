@@ -22,7 +22,7 @@ sql_queries = """
                 description TEXT,
                 start_date DATE,
                 end_date DATE,
-                completion_status INTEGER
+                completion_status BOOL
             );
             CREATE TABLE tags (
                 tag_id INTEGER PRIMARY KEY,
@@ -64,7 +64,7 @@ with connection:
 query = "INSERT INTO events (title, description, start_date, end_date, completion_status) VALUES (?, ?, ?, ?, ?)"
 
 for item in data:
-    values = (item['title'], item['description'], item['begin_date'],
+    values = (item['title'], item['description'], item['start_date'],
               item['end_date'], item['completion_status'])
     c.execute(query, values)
 

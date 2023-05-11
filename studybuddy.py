@@ -14,13 +14,33 @@ from sqlite3 import Error
 """""
 SQLite database
 
-Event Properties
-- Title         STRING
-- Description   STRING
-- Tags          STRING?
-- Start Date    DATE/TIME
-- Due Date      DATE/TIME
-- Complete      BOOLEAN
+# events
+1 - event_id                INTEGER
+2 - title                   TEXT
+3 - description             TEXT
+4 - start_date              DATE
+5 - end_date                DATE
+6 - completion_status       BOOLEAN
+
+# tags
+1 - tag_id                  INTEGER
+2 - tag_name                TEXT
+
+# schedules
+1 - schedule_id             INTEGER
+2 - title                   TEXT
+3 - description             TEXT
+4 - start_date              DATE
+5 - end_date                DATE
+6 - day_of_week             TEXT
+
+# event_tags
+1 - event_id                INTEGER
+2 - tag_id                  INTEGER
+
+# schedule_tags
+1 - schedule_id             INTEGER
+2 - tag_id                  INTEGER
 
 """""
 
@@ -83,12 +103,16 @@ class Database_Controller():
             c.executescript(sql_queries)
 
     def query_week(self, week_start):
-        query = "SELECT * FROM events WHERE end_date between " + week_start.strftime(
-            "%Y/%m/%d")+" and " + (week_start + timedelta(days=6)).strftime("%Y/%m/%d")
+        query = """SELECT * FROM events WHERE date(end_date) between ? and ?"""
 
         if self.conn is not None:
             c = self.conn.cursor()
-            data = c.execute(query)
+            params = (week_start.strftime(
+            "%Y-%m-%d"), (week_start + timedelta(days=6)).strftime("%Y-%m-%d"))
+            print(
+                params)
+            print(query)
+            data = c.execute(query, params)
 
         return data
 
@@ -166,19 +190,19 @@ class Main(QMainWindow):
 
         # Navigation Menu
 
-        ## Calendar
+        # Calendar
         self.buttonNavigationCalendarDay.clicked.connect(self.view_day)
         self.buttonNavigationCalendarMonth.clicked.connect(self.view_month)
         self.buttonNavigationCalendarWeek.clicked.connect(self.view_week)
 
-        ## Search
+        # Search
         self.buttonNavigationSearch.clicked.connect(self.view_search)
 
-        ## Schedule
+        # Schedule
         self.buttonNavigationScheduleView.clicked.connect(self.view_schedule)
         self.buttonNavigationScheduleAdd.clicked.connect(self.create_schedule)
 
-        ## Settings
+        # Settings
         self.buttonNavigationSettings.clicked.connect(self.view_settings)
 
         # Weekly View
@@ -211,17 +235,17 @@ class Main(QMainWindow):
         self.weekly_data = []
         for item in self.data:
             dic = {
-                'id': item[0],
-                'description': item[1],
-                'start_date': item[2],
-                'end_date': item[3],
-                'status': item[4],
-                'title': item[5]
+                'event_id': item[0],
+                'title': item[1],
+                'description': item[2],
+                'start_date': item[3],
+                'end_date': item[4],
+                'completion_status': item[5]
             }
             self.weekly_data.append(dic)
 
+    # VIEWS
 
-    ## VIEWS
 
     def view_day(self):
         self.populate_daily()
@@ -270,11 +294,11 @@ class Main(QMainWindow):
                 "Week"+' '+str(dateSelected.weekNumber()[0])+" of "+str(self.calendarWidget.yearShown()))
 
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
-        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
         self.labelSunday.setText(thisWeeksSunday)
 
-        date_1 = datetime.strptime(thisWeeksSunday, "%B %d")
+        date_1 = datetime.strptime(thisWeeksSunday, '%Y-%m-%d')
 
         self.sun = (date_1 + timedelta(days=0)).strftime("%B %d")
         self.mon = (date_1 + timedelta(days=1)).strftime("%B %d")
@@ -324,7 +348,7 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleAdd.setDisabled(False)
         self.buttonNavigationSettings.setDisabled(True)
 
-    ## EVENTS
+    # EVENTS
 
     def create_event(self):
         self.set_event_defaults()
@@ -388,7 +412,7 @@ class Main(QMainWindow):
         self.set_event_defaults()
         self.populate_daily()
 
-    ## SCHEDULE
+    # SCHEDULE
 
     def create_schedule(self):
         self.stackedWidgetViews.setCurrentIndex(6)
@@ -406,7 +430,13 @@ class Main(QMainWindow):
     def delete_schedule(self):
         pass
 
-    ## OTHER
+    # OTHER
+
+    def format_completion_status(self, data):
+        if data == 0:
+            return "Incomplete"
+        else:
+            return "Completed"
 
     def get_sunday(self):
 
@@ -420,14 +450,14 @@ class Main(QMainWindow):
             )) + ' ' + str(self.selected_date.weekNumber()[0]-1) + ' 0', '%Y %W %w')
 
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
-        thisWeeksSunday = thisWeeksSunday.strftime('%B %d')
+        thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
-        return datetime.strptime(thisWeeksSunday, "%B %d")
+        return datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
 
     def select_date(self):
         self.selected_date = self.calendarWidget.selectedDate()
         self.selected_date = str(self.selected_date.year(
-        )) + '/'+str(self.selected_date.month())+'/'+str(self.selected_date.day())
+        )) + '-'+str(self.selected_date.month())+'-'+str(self.selected_date.day())
 
     def set_event_defaults(self):
         self.dataModifyEventTags.clear()
@@ -467,7 +497,7 @@ class Main(QMainWindow):
         for task in self.weekly_data:
 
             end_date_formatted = datetime.strptime(
-                task['end_date'], "%m/%d/%Y").strftime("%B %d")
+                task['end_date'], "%Y-%m-%d").strftime("%B %d")
 
             if end_date_formatted == self.sun:
                 self.sun_list.append(task)
@@ -494,7 +524,7 @@ class Main(QMainWindow):
             self.tableviewMonday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewMonday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -507,7 +537,7 @@ class Main(QMainWindow):
             self.tableviewSunday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewSunday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -520,7 +550,7 @@ class Main(QMainWindow):
             self.tableviewTuesday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewTuesday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -533,7 +563,7 @@ class Main(QMainWindow):
             self.tableviewWednesday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewWednesday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -546,7 +576,7 @@ class Main(QMainWindow):
             self.tableviewThursday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewThursday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -559,7 +589,7 @@ class Main(QMainWindow):
             self.tableviewFriday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewFriday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -572,7 +602,7 @@ class Main(QMainWindow):
             self.tableviewSaturday.setItem(
                 tablerow, 0, QTableWidgetItem(row['title']))
             self.tableviewSaturday.setItem(
-                tablerow, 1, QTableWidgetItem(str(row['status'])))
+                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
 
             tablerow += 1
             row_count += 1
@@ -590,19 +620,24 @@ class Main(QMainWindow):
 
         # Grab data from database and populate qLineEdit boxes
         cur = self.connectDB.conn.cursor()
-        query = """SELECT * FROM events where end_date = ?"""
-        params = (dateSelected.toString("M/d/yyyy"), )
+        query = """SELECT * FROM events where date(end_date) = ?"""
+        params = (dateSelected.toString("yyyy-MM-dd"), )
         row_count = 1
         tablerow = 0
         for row in cur.execute(query, params):
             if row is not None:
                 self.tableViewDaily.setRowCount(row_count)
-                self.tableViewDaily.setItem(tablerow, 0, QTableWidgetItem(row[5]))
-                self.tableViewDaily.setItem(tablerow, 1, QTableWidgetItem(row[1]))
-                self.tableViewDaily.setItem(tablerow, 2, QTableWidgetItem(row[3]))
-                self.tableViewDaily.setItem(tablerow, 3, QTableWidgetItem(str(row[4])))
+                self.tableViewDaily.setItem(
+                    tablerow, 0, QTableWidgetItem(row[1]))
+                self.tableViewDaily.setItem(
+                    tablerow, 1, QTableWidgetItem(row[3]))
+                self.tableViewDaily.setItem(
+                    tablerow, 2, QTableWidgetItem(row[4]))
+                self.tableViewDaily.setItem(
+                    tablerow, 3, QTableWidgetItem(self.format_completion_status(row[5])))
                 tablerow += 1
                 row_count += 1
+
 
 if __name__ == "__main__":
     """
