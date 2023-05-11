@@ -43,18 +43,45 @@ class Database_Controller():
         return conn
 
     def create_note_table(self):
-        sql_create_note_table = """ CREATE TABLE IF NOT EXISTS note(
-                                        id integer PRIMARY KEY,
-                                        description text,
-                                        begin_date text,
-                                        end_date text,
-                                        completion_status integer,
-                                        title text
-                                    ); """
-
-        if self.conn is not None:
+        sql_queries = """
+            CREATE TABLE IF NOT EXISTS events (
+                event_id INTEGER PRIMARY KEY,
+                title TEXT,
+                description TEXT,
+                start_date DATE,
+                end_date DATE,
+                completion_status INTEGER
+            );
+            CREATE TABLE IF NOT EXISTS tags (
+                tag_id INTEGER PRIMARY KEY,
+                tag_name TEXT
+            );
+            CREATE TABLE IF NOT EXISTS event_tags (
+                event_id INTEGER,
+                tag_id INTEGER,
+                FOREIGN KEY (event_id) REFERENCES events(event_id),
+                FOREIGN KEY (tag_id) REFERENCES tags(tag_id),
+                PRIMARY KEY (event_id, tag_id)
+            );
+            CREATE TABLE IF NOT EXISTS schedules (
+                schedule_id INTEGER PRIMARY KEY,
+                title TEXT,
+                description TEXT,
+                start_date DATE,
+                end_date DATE,
+                days_of_week TEXT
+            );
+            CREATE TABLE IF NOT EXISTS schedule_tags (
+                schedule_id INTEGER,
+                tag_id INTEGER,
+                FOREIGN KEY (schedule_id) REFERENCES schedules(schedule_id),
+                FOREIGN KEY (tag_id) REFERENCES tags(tag_id),
+                PRIMARY KEY (schedule_id, tag_id)
+            );
+        """
+        with self.conn:
             c = self.conn.cursor()
-            c.execute(sql_create_note_table)
+            c.executescript(sql_queries)
 
     def query_week(self, week_start):
         query = "SELECT * FROM NOTE WHERE end_date between " + week_start.strftime(
@@ -79,7 +106,7 @@ class Database_Controller():
         end_date = self.data['end_date']
         status = self.data['status']
 
-        sql = """INSERT INTO note(description,begin_date,end_date,completion_status,title) VALUES(?,?,?,?,?);"""
+        sql = """INSERT INTO note(description,start_date,end_date,completion_status, title) VALUES(?,?,?,?,?);"""
         params = (description, start_date, end_date, status, title)
 
         c = self.conn.cursor()
@@ -107,7 +134,7 @@ class Database_Controller():
         end_date = self.data['end_date']
         status = self.data['status']
 
-        sql = """UPDATE note SET description = ?, begin_date= ?,end_date = ?,completion_status = ?,title = ? WHERE title = ? """
+        sql = """UPDATE note SET description = ?, start_date= ?,end_date = ?,completion_status = ?,title = ? WHERE title = ? """
 
         params = (description, start_date, end_date, status, title, title)
 
@@ -186,7 +213,7 @@ class Main(QMainWindow):
         for item in self.data:
             dic = {
                 'id': item[0],
-                'discription': item[1],
+                'description': item[1],
                 'start_date': item[2],
                 'end_date': item[3],
                 'status': item[4],
@@ -412,7 +439,6 @@ class Main(QMainWindow):
         self.dataModifyEventStatus.setValue(0)
 
     def get_event_data(self):
-
         data = {
             "title": self.dataModifyEventTitle.text(),
             "tags": self.dataModifyEventTags.text(),
@@ -421,7 +447,6 @@ class Main(QMainWindow):
             "end_date": self.dataModifyEventEndDate.text(),
             "status": self.dataModifyEventStatus.value()
         }
-
         return data
 
     def display_weekly_view(self):
