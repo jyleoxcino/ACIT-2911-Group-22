@@ -271,7 +271,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -1245,35 +1245,55 @@ font-size: 25px
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="3" column="0">
-            <widget class="QRadioButton" name="radioSearchTitle">
+           <item row="1" column="0" colspan="2">
+            <widget class="QLabel" name="labelSearch">
+             <property name="styleSheet">
+              <string notr="true">QLabel{font-size: 25px}</string>
+             </property>
              <property name="text">
-              <string>Title</string>
+              <string>Search</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
-            <widget class="QRadioButton" name="radioSearchTags">
+           <item row="5" column="1">
+            <widget class="QRadioButton" name="radioSearchDescription">
              <property name="text">
-              <string>Tags</string>
+              <string>Description</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="3">
+           <item row="5" column="4">
+            <widget class="QRadioButton" name="radioSearchEndDate">
+             <property name="text">
+              <string>End Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="7">
+            <widget class="QLineEdit" name="dataSearch"/>
+           </item>
+           <item row="5" column="3">
             <widget class="QRadioButton" name="radioSearchStartDate">
              <property name="text">
               <string>Start Date</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="5">
-            <widget class="QRadioButton" name="radioSearchStatus">
+           <item row="8" column="6">
+            <widget class="QPushButton" name="buttonSearchCancel">
              <property name="text">
-              <string>Status</string>
+              <string>Back</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0" colspan="7">
+           <item row="5" column="2">
+            <widget class="QRadioButton" name="radioSearchTags">
+             <property name="text">
+              <string>Tags</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="7">
             <widget class="QTableWidget" name="tableSearch">
              <column>
               <property name="text">
@@ -1302,41 +1322,21 @@ font-size: 25px
              </column>
             </widget>
            </item>
+           <item row="5" column="5">
+            <widget class="QRadioButton" name="radioSearchStatus">
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </widget>
+           </item>
            <item row="5" column="6">
-            <widget class="QPushButton" name="buttonSearchCancel">
+            <widget class="QRadioButton" name="radioSearchTitle">
              <property name="text">
-              <string>Back</string>
+              <string>Title</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0" colspan="7">
-            <widget class="QLineEdit" name="dataSearch"/>
-           </item>
-           <item row="3" column="1">
-            <widget class="QRadioButton" name="radioSearchDescription">
-             <property name="text">
-              <string>Description</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QLabel" name="labelSearch">
-             <property name="styleSheet">
-              <string notr="true">QLabel{font-size: 25px}</string>
-             </property>
-             <property name="text">
-              <string>Search</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QRadioButton" name="radioSearchEndDate">
-             <property name="text">
-              <string>End Date</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="6">
+           <item row="5" column="0">
             <widget class="QRadioButton" name="radioSearchAll">
              <property name="text">
               <string>All</string>

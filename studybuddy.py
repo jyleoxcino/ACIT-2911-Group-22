@@ -133,7 +133,7 @@ class Database_Controller():
 
     def delete_event(self, data):
         c = self.conn.cursor()
-        deleteQuery = """DELETE FROM events WHERE title = ?"""
+        deleteQuery = """DELETE FROM events WHERE event_id = ?"""
         values = (data, )
         c.execute(deleteQuery, values)
         self.conn.commit()
@@ -277,6 +277,7 @@ class Main(QMainWindow):
 
     # Application Functions
     def __set_defaults(self):
+        self.tableSearch.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.stackedWidgetViews.setCurrentIndex(0)
         self.buttonNavigationCalendarMonth.setDisabled(True)
         self.popularize_weekly_list()
@@ -371,6 +372,7 @@ class Main(QMainWindow):
         self.stackedWidgetViews.setCurrentIndex(3)
 
     def view_search(self):
+        self.radioSearchAll.setChecked(True)
         self.stackedWidgetViews.setCurrentIndex(4)
         self.buttonNavigationCalendarDay.setDisabled(False)
         self.buttonNavigationCalendarMonth.setDisabled(False)
@@ -483,10 +485,11 @@ class Main(QMainWindow):
             event_id = self.tableViewDaily.item(row, 0).text()
             try:
                 self.connectDB.delete_event(event_id)
+                self.tableViewDaily.removeRow(row)
             except Error as e:
                 print(e)
                 return
-            self.tableViewDaily.removeRow(row)
+
 
     def event_manager(self):
         if self.edit_flag == 0:
@@ -495,6 +498,7 @@ class Main(QMainWindow):
             self.connectDB.update_event(self.get_event_data())
         self.set_event_defaults()
         self.populate_daily()
+        self.view_day()
 
     def add_event_tag(self):
         current_tags = []
@@ -670,9 +674,6 @@ class Main(QMainWindow):
 
 
     def date_search(self):
-        if self.radioSearchAll:
-            print('yes')
-            self.counter=0
         self.dataSearch.textChanged.connect(self.date_search_helper)
         self.radioSearchAll.toggled.connect(self.date_search_helper)
         self.radioSearchDescription.toggled.connect(self.date_search_helper)
@@ -684,7 +685,6 @@ class Main(QMainWindow):
 
     def date_search_helper(self):
         self.tableSearch.setRowCount(0)
-        print(self.dataSearch.text())
         check = "*"
         if self.radioSearchAll.isChecked():
             check = "*"
@@ -705,7 +705,6 @@ class Main(QMainWindow):
         cur = self.connectDB.conn.cursor()
         if len(self.dataSearch.text()) >0:
             query = self.connectDB.search_data(check,self.dataSearch.text())
-            print(query)
             row_count = 1
             tablerow = 0
             for row in cur.execute(query):
