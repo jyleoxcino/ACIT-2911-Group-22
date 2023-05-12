@@ -258,7 +258,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -377,16 +377,6 @@ background-color:lightblue;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLineEdit" name="dataModifyEventTags">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>100</y>
-            <width>690</width>
-            <height>22</height>
-           </rect>
-          </property>
-         </widget>
          <widget class="QLineEdit" name="dataModifyEventTitle">
           <property name="geometry">
            <rect>
@@ -511,6 +501,67 @@ background-color:lightblue;
            <string>Start Date</string>
           </property>
          </widget>
+         <widget class="QTableWidget" name="tableModifyEventTags">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>90</y>
+            <width>460</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+         <widget class="QComboBox" name="comboModifyEventTagsAdd">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>151</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventAddTag">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>100</y>
+            <width>20</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>-</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventDeleteTag">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>100</y>
+            <width>20</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
         </widget>
         <widget class="QFrame" name="frameModifyEventMiddle">
          <property name="geometry">
@@ -625,17 +676,17 @@ background-color:lightblue;
         </property>
         <column>
          <property name="text">
+          <string>Event_ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Title</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Tags</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>End Date</string>
+          <string>Start Date</string>
          </property>
         </column>
         <column>
