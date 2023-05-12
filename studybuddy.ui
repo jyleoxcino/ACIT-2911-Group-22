@@ -51,7 +51,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -169,16 +169,6 @@ background-color:lightblue;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLineEdit" name="dataModifyEventTags">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>100</y>
-            <width>690</width>
-            <height>22</height>
-           </rect>
-          </property>
-         </widget>
          <widget class="QLineEdit" name="dataModifyEventTitle">
           <property name="geometry">
            <rect>
@@ -301,6 +291,61 @@ background-color:lightblue;
           </property>
           <property name="text">
            <string>Start Date</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="comboModifyEventTagsAdd">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="tableModifyEventTags">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>90</y>
+            <width>430</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventAddTag">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>100</y>
+            <width>20</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventDeleteTag">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>100</y>
+            <width>21</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
           </property>
          </widget>
         </widget>
@@ -1617,7 +1662,7 @@ font-size: 25px
      <x>0</x>
      <y>0</y>
      <width>1355</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
