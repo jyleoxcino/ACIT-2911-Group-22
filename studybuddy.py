@@ -187,6 +187,64 @@ class Database_Controller():
         cursor = c.execute(query)
         data = cursor.fetchall()
         return data
+    
+    def Schedule_Insert(self,data):
+        if data is None:
+            return
+        else:
+            self.data = data
+        print(self.data)
+        title = self.data['title']
+        # tags = self.data['tags']
+        description = self.data['description']
+        start_date = self.data['start_date']
+        end_date = self.data['end_date']
+        # status = self.data['status']
+        print(title,description,start_date,end_date)
+        # sql = """INSERT INTO schedules(description,start_date,end_date,title) VALUES(?,?,?,?);"""
+       
+        # c = self.conn.cursor()
+        # c.executescript(sql,params)
+        # self.conn.commit()
+
+        sql1 = """INSERT INTO schedules(title,description,start_date,end_date) VALUES(?,?,?,?)"""
+        param1 =(title,description,start_date,end_date)
+        c= self.conn.cursor()
+        c.execute(sql1,param1)
+        self.conn.commit()
+        # sql2 = """INSERT INTO tags(tag_name) VALUES(?)"""
+        # param2 = (tags, )
+        # c.execute(sql2,param2)
+        # self.conn.commit
+
+    def delete_Schedule(self,data):
+        c = self.conn.cursor()
+        
+        deleteQuery = """DELETE FROM schedules WHERE schedule_id = ?"""
+        values = (data, )
+        c.execute(deleteQuery,values)
+        self.conn.commit()
+
+    def ScheduleUpdate(self,data):
+        if data is None:
+            return
+        else:
+            self.data = data
+        print(self.data)
+        title = self.data['title']
+        schedule_id = self.data['schedule_id']
+        # tags = self.data['tags']
+        description = self.data['description']
+        start_date = self.data['start_date']
+        end_date = self.data['end_date']
+        # status = self.data['status']
+        print(title)
+        sql = """UPDATE schedules SET title = ?, description = ?, start_date = ?, end_date = ?  WHERE schedule_id = ? """ 
+        params = (title,description,start_date, end_date,schedule_id)
+        c = self.conn.cursor()
+        c.execute(sql,params)
+        self.conn.commit()
+                 
         
 
 class Main(QMainWindow):
@@ -226,6 +284,10 @@ class Main(QMainWindow):
         # Schedule
         self.buttonNavigationScheduleView.clicked.connect(self.view_schedule)
         self.buttonNavigationScheduleAdd.clicked.connect(self.create_schedule)
+        self.buttonScheduleSubmit.clicked.connect(self.event_manager2)
+        self.scheduleDelete.clicked.connect(self.Schedule_Delete)
+        self.scheduleUpdate.clicked.connect(self.Schedule_UpdateButton)
+        # self.buttonScheduleSubmit.clicked.connect(self.Schedule_DataUpdate)
 
         # Settings
         self.buttonNavigationSettings.clicked.connect(self.view_settings)
@@ -247,6 +309,7 @@ class Main(QMainWindow):
         # Calendar Interaction
         self.calendarWidget.clicked.connect(self.select_date)
         self.calendarWidget.activated.connect(self.view_day)
+        
 
         # Defaults
         self.__set_defaults()
@@ -270,6 +333,7 @@ class Main(QMainWindow):
             }
             self.weekly_data.append(dic)
         self.tableViewDaily.setColumnHidden(0, True)
+        self.tableWidget.setColumnHidden(0,True)
     # VIEWS
 
 
@@ -363,6 +427,7 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleView.setDisabled(True)
         self.buttonNavigationScheduleAdd.setDisabled(False)
         self.buttonNavigationSettings.setDisabled(False)
+        self.Populate_Schedule()
 
     def view_settings(self):
         self.stackedWidgetViews.setCurrentIndex(7)
@@ -460,6 +525,7 @@ class Main(QMainWindow):
     # SCHEDULE
 
     def create_schedule(self):
+
         self.stackedWidgetViews.setCurrentIndex(6)
         self.buttonNavigationCalendarDay.setDisabled(False)
         self.buttonNavigationCalendarMonth.setDisabled(False)
@@ -468,6 +534,7 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleView.setDisabled(False)
         self.buttonNavigationScheduleAdd.setDisabled(True)
         self.buttonNavigationSettings.setDisabled(False)
+        self.edit_flag = 0
 
     def edit_schedule(self):
         pass
@@ -691,6 +758,143 @@ class Main(QMainWindow):
                     tablerow, 3, QTableWidgetItem(self.format_completion_status(row[5])))
                 tablerow += 1
                 row_count += 1
+
+
+    def Schedule_Add(self):
+        self.edit_flag = 0
+        # tags = self.dataScheduleTags.text()
+        title = self.dataScheduleTitle.text()
+        description = self.dataScheduleDescription.toPlainText()
+        start_date = self.dataScheduleStartDate.text()
+        end_date = self.dataScheduleEndDate.text()
+        # status = self.horizontalSlider.value()
+        data = {
+                "title": title,
+                # "tags" : tags,
+                "description": description,
+                "start_date" : start_date,
+                "end_date" : end_date,
+                # "status" : status
+                }
+    # self.lineEditTags.clear()
+    # self.lineEditTitle.clear()
+    # self.lineEditDescription.clear()
+    # self.dateEdit.clear()
+    # self.dateEdit_2.clear()
+        # self.connectDB.Schedule_Insert(data)
+        return data
+
+    def Populate_Schedule(self):
+        cur = self.connectDB.conn.cursor()
+        query = """SELECT * FROM schedules """
+        # params = (dateSelected.toString("yyyy-MM-dd"), )
+        row_count = 1
+        tablerow = 0
+        for row in cur.execute(query):
+            if row is not None:
+                self.tableWidget.setRowCount(row_count)
+                # event_id - hidden
+                self.tableWidget.setItem(
+                    tablerow, 0, QTableWidgetItem(str(row[0])))
+                #description
+                self.tableWidget.setItem(
+                    tablerow,5,QTableWidgetItem(row[2])
+                )
+                # title
+                self.tableWidget.setItem(
+                    tablerow, 1, QTableWidgetItem(row[1]))
+                # start date
+                self.tableWidget.setItem(
+                    tablerow, 2, QTableWidgetItem(row[3]))
+                # completion
+                self.tableWidget.setItem(
+                    tablerow, 3, QTableWidgetItem(row[4]))
+                self.tableWidget.setItem(
+                    tablerow,4, QTableWidgetItem(row[5])
+                )
+
+               
+                tablerow += 1
+                row_count += 1 
+
+    def Schedule_Delete(self):
+      if len(self.tableWidget.selectedItems()) > 0:
+            row = self.tableWidget.currentRow()
+            self.schedule_id = self.tableWidget.item(row, 0).text()
+            try:
+                self.connectDB.delete_Schedule(self.schedule_id)
+            except Error as e:
+                print(e)
+                return
+            self.tableWidget.removeRow(row)
+
+    def Schedule_UpdateButton(self):
+        self.edit_flag = 1
+        self.stackedWidgetViews.setCurrentIndex(6)
+        if len(self.tableWidget.selectedItems()) > 0:
+            row = self.tableWidget.currentRow()
+            self.schedule_id = self.tableWidget.item(row, 0).text()
+            cur = self.connectDB.conn.cursor()
+            sql = """SELECT * FROM schedules WHERE schedule_id = ?"""
+            values = (self.schedule_id, )
+            row_count = 1
+            tablerow = 0
+            for row in cur.execute(sql, values):
+                print(row)
+                # self.stackedWidget.setRowCount(row_count)
+                # print(row)
+                self.dataScheduleTitle.setText(row[1])
+                self.dataScheduleTags.setText("placerholder")
+                self.dataScheduleDescription.setText(row[2])
+                
+                # self.dataScheduleStartDate.setDate(qdateV.fromString(row[3]))
+                #row[3]= 2023-05-12
+                year,month,day = row[3].split('-')
+                year1,month2,day2 = row[4].split("-")
+                self.qdateV = QDate(int(year), int(month), int(day))
+                self.qdateV2 = QDate(int(year1), int(month2),int(day2))
+                self.dataScheduleStartDate.setDate(self.qdateV)
+                self.dataScheduleStartDate.setMinimumDate(self.qdateV)
+                self.dataScheduleEndDate.setMinimumDate(self.qdateV2)
+                self.dataScheduleEndDate.setDate(self.qdateV2)
+                # self.dataModifyEventEndDate.setDate(self.qdateV)
+                # self.dataSched
+                # self.dataScheduleEndDate.setDate(datetime.strptime(row[4],row[4]))
+                
+                
+                # self.lineEditDescription.setText(row[4])
+                # self.dataScheduleStartDate.setDate(datetime.strptime(row[3]))
+                # self.dateEdit.setDate(datetime.strptime(row[2]))
+                # self.dateEdit_2.setDate(datetime.strptime(row[3]))
+                # self.horizontalSlider.setValue(row[4])
+            
+
+                tablerow += 1
+                row_count += 1
+
+    def Schedule_DataUpdate(self):
+        title = self.dataScheduleTitle.text()
+        description = self.dataScheduleDescription.toPlainText()
+        start_date = self.dataScheduleStartDate.text()
+        end_date = self.dataScheduleEndDate.text()
+        data = {
+            "title" : title,
+            "schedule_id":self.schedule_id,
+            "description":description,
+            "start_date":start_date,
+            "end_date":end_date}
+        return data
+        # self.connectDB.ScheduleUpdate(data)
+
+    def event_manager2(self):
+        if self.edit_flag == 0:
+            self.connectDB.Schedule_Insert(self.Schedule_Add())
+        elif self.edit_flag == 1:
+            self.connectDB.ScheduleUpdate(self.Schedule_DataUpdate())
+        
+
+
+
 
 
 if __name__ == "__main__":
