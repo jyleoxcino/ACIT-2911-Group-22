@@ -119,15 +119,14 @@ class Database_Controller():
             self.data = data
 
         title = self.data['title']
-        tags = self.data['tags']
         description = self.data['description']
         start_date = self.data['start_date']
         end_date = self.data['end_date']
-        status = self.data['status']
+        status = self.data['completion_status']
 
         sql = """INSERT INTO events(description,start_date,end_date,completion_status, title) VALUES(?,?,?,?,?);"""
         params = (description, start_date, end_date, status, title)
-
+        print("event has been created")
         c = self.conn.cursor()
         c.execute(sql, params)
         self.conn.commit()
@@ -146,16 +145,16 @@ class Database_Controller():
         else:
             self.data = data
 
+        event_id = self.data['event_id']
         title = self.data['title']
-        tags = self.data['tags']
         description = self.data['description']
         start_date = self.data['start_date']
         end_date = self.data['end_date']
-        status = self.data['status']
+        completion_status = self.data['completion_status']
 
-        sql = """UPDATE events SET description = ?, start_date= ?,end_date = ?,completion_status = ?,title = ? WHERE title = ? """
+        sql = """UPDATE events SET title = ?, description = ?, start_date= ?, end_date = ?, completion_status = ? WHERE event_id = ? """
 
-        params = (description, start_date, end_date, status, title, title)
+        params = (title, description, start_date, end_date, completion_status, event_id)
 
         c = self.conn.cursor()
         c.execute(sql, params)
@@ -187,7 +186,6 @@ class Database_Controller():
         cursor = c.execute(query)
         data = cursor.fetchall()
         return data
-
 
 class Main(QMainWindow):
     def __init__(self):
@@ -238,11 +236,13 @@ class Main(QMainWindow):
         self.buttonViewDailyEdit.clicked.connect(self.edit_event)
         self.buttonViewDailyDelete.clicked.connect(self.delete_event)
         self.tableViewDaily.doubleClicked.connect(self.edit_event)
+        self.buttonViewDailyBack.clicked.connect(self.view_day)
 
         # Create / Edit Event View
         self.buttonModifyEventSubmit.clicked.connect(self.event_manager)
         self.buttonModifyEventCancel.clicked.connect(self.view_day)
-        self.buttonViewDailyBack.clicked.connect(self.view_day)
+        self.buttonModifyEventAddTag.clicked.connect(self.add_event_tag)
+        self.buttonModifyEventDeleteTag.clicked.connect(self.delete_event_tag)
 
         # Calendar Interaction
         self.calendarWidget.clicked.connect(self.select_date)
@@ -257,6 +257,7 @@ class Main(QMainWindow):
         self.buttonNavigationCalendarMonth.setDisabled(True)
         self.popularize_weekly_list()
         self.tableViewDaily.setColumnHidden(0, True)
+
     # VIEWS
 
     def popularize_weekly_list(self):
@@ -379,6 +380,8 @@ class Main(QMainWindow):
 
     def create_event(self):
         self.set_event_defaults()
+        for item in self.database_tags:
+            self.comboModifyEventTagsAdd.addItem(item[1])
         self.edit_flag = 0
         dateSelected = self.calendarWidget.selectedDate()
         self.labelModifyEventDate.setText(dateSelected.toString("MMM dd"))
@@ -396,28 +399,38 @@ class Main(QMainWindow):
         tablerow = 0
         for row in cur.execute(query):
             self.tableViewDaily.setRowCount(row_count)
-
             self.tableViewDaily.setItem(tablerow, 0, QTableWidgetItem(row[5]))
             self.tableViewDaily.setItem(tablerow, 1, QTableWidgetItem(row[1]))
             self.tableViewDaily.setItem(tablerow, 2, QTableWidgetItem(row[3]))
             self.tableViewDaily.setItem(tablerow, 3, QTableWidgetItem(row[4]))
-
             tablerow += 1
             row_count += 1
 
     def edit_event(self):
+        current_tags = []
+        for column in range(self.tableModifyEventTags.columnCount()):
+            item = self.tableModifyEventTags.item(0, column)
+            if item is not None:
+                current_tags.append(item)
+        for item in self.database_tags:
+            for tags in current_tags:
+                if item == tags:
+                    pass
+                else:
+                    self.comboModifyEventTagsAdd.addItem(item[1])
+
         self.set_event_defaults()
+        selected_row = self.tableViewDaily.selectedItems()
+        if len(selected_row) < 1:
+            return
         self.stackedWidgetViews.setCurrentIndex(1)
         self.edit_flag = 1
         table = self.tableViewDaily
-        selected_row = self.tableViewDaily.selectedItems()
         row_number = self.tableViewDaily.row(selected_row[0])
 
-        event_id = int(table.item(row_number, 0).text())
-        tags_ids = self.connectDB.get_event_tags(event_id)
+        self.event_id = int(table.item(row_number, 0).text())
+        tags_ids = self.connectDB.get_event_tags(self.event_id)
         tags = self.connectDB.get_tags(tags_ids)
-
-        self.tableModifyEventTags.setRowCount(1)
 
         column_count = 1
         column_number = 0
@@ -428,13 +441,10 @@ class Main(QMainWindow):
             column_number += 1
             column_count += 1
 
-        if len(selected_row) == 0:
-            return
-
         # when selecting an item on the QTableWidget it'll edit the events that you clicked
         cur = self.connectDB.conn.cursor()
         sql = """SELECT * FROM events WHERE event_id = ?"""
-        values = (event_id, )
+        values = (self.event_id, )
 
         for item in cur.execute(sql, values):
             self.dataModifyEventTitle.setText(item[1])
@@ -460,8 +470,41 @@ class Main(QMainWindow):
         self.set_event_defaults()
         self.populate_daily()
 
-    # SCHEDULE
+    def add_event_tag(self):
+        current_tags = []
+        for column in range(self.tableModifyEventTags.columnCount()):
+            item = self.tableModifyEventTags.item(0, column)
+            if item is not None:
+                current_tags.append(item)
+        tag = self.comboModifyEventTagsAdd.currentText()
+        if tag == "":
+            return
+        for tags in current_tags:
+            if tag == tags:
+                break
 
+        item = QTableWidgetItem(tag)
+        self.comboModifyEventTagsAdd.removeItem(self.comboModifyEventTagsAdd.findText(tag))
+        self.tableModifyEventTags.setColumnCount(self.tableModifyEventTags.columnCount() + 1)
+        self.tableModifyEventTags.setItem(0, self.tableModifyEventTags.columnCount() - 1, item)
+        self.comboModifyEventTagsAdd.setCurrentText("")
+
+    def delete_event_tag(self):
+        current_tags = []
+        for column in range(self.tableModifyEventTags.columnCount()):
+            item = self.tableModifyEventTags.item(0, column)
+            if item is not None:
+                current_tags.append(item)
+        if self.tableModifyEventTags.selectedItems():
+            selected_item = self.tableModifyEventTags.selectedItems()[0]
+            tag = selected_item.text()
+            for tags in current_tags:
+                if tag == tags:
+                    return
+            self.tableModifyEventTags.removeColumn(selected_item.column())
+            self.comboModifyEventTagsAdd.addItem(tag)
+
+    # SCHEDULE
     def create_schedule(self):
         self.stackedWidgetViews.setCurrentIndex(6)
         self.buttonNavigationCalendarDay.setDisabled(False)
@@ -506,25 +549,31 @@ class Main(QMainWindow):
         )) + '-'+str(self.selected_date.month())+'-'+str(self.selected_date.day())
 
     def set_event_defaults(self):
-        # self.dataModifyEventTags.clear()
         self.dataModifyEventTitle.clear()
         self.dataModifyEventDescription.clear()
         self.dataModifyEventStartDate.clear()
         self.dataModifyEventEndDate.clear()
         self.dataModifyEventStatus.setValue(0)
-
+        self.comboModifyEventTagsAdd.clear()
+        self.tableModifyEventTags.clear()
+        self.tableModifyEventTags.setColumnCount(0)
+        self.tableModifyEventTags.setRowCount(1)
         self.comboModifyEventTagsAdd.addItem("")
-        for item in self.database_tags:
-            self.comboModifyEventTagsAdd.addItem(item[1])
 
     def get_event_data(self):
+        current_tags = []
+        for column in range(self.tableModifyEventTags.columnCount()):
+            item = self.tableModifyEventTags.item(0, column)
+            if item is not None:
+                current_tags.append(item.text())
         data = {
+            "event_id": self.event_id,
             "title": self.dataModifyEventTitle.text(),
             # "tags": self.dataModifyEventTags.text(),
             "description": self.dataModifyEventDescription.toPlainText(),
             "start_date": self.dataModifyEventStartDate.text(),
             "end_date": self.dataModifyEventEndDate.text(),
-            "status": self.dataModifyEventStatus.value()
+            "completion_status": self.dataModifyEventStatus.value()
         }
         return data
 
@@ -618,7 +667,6 @@ class Main(QMainWindow):
                     tablerow, 4, QTableWidgetItem(self.format_completion_status(row[5])))
                 tablerow += 1
                 row_count += 1
-
 
 if __name__ == "__main__":
     """

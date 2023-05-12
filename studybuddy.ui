@@ -309,11 +309,17 @@ background-color:lightblue;
          <widget class="QTableWidget" name="tableModifyEventTags">
           <property name="geometry">
            <rect>
-            <x>270</x>
-            <y>90</y>
-            <width>430</width>
-            <height>30</height>
+            <x>240</x>
+            <y>80</y>
+            <width>451</width>
+            <height>41</height>
            </rect>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>false</bool>
