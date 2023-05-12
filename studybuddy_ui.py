@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\New folder (3)\ACIT-2911-Group-22\studybuddy.ui'
+# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\git\ACIT-2911-Group-22\studybuddy.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -328,9 +328,6 @@ class Ui_StudyBuddy(object):
         self.tableViewDaily.horizontalHeader().setStretchLastSection(True)
         self.tableViewDaily.verticalHeader().setCascadingSectionResizes(True)
         self.gridLayout_3.addWidget(self.tableViewDaily, 4, 0, 1, 4)
-        self.buttonViewDailyBack = QtWidgets.QPushButton(self.pageViewDaily)
-        self.buttonViewDailyBack.setObjectName("buttonViewDailyBack")
-        self.gridLayout_3.addWidget(self.buttonViewDailyBack, 5, 3, 1, 1)
         self.labelViewDailyDate = QtWidgets.QLabel(self.pageViewDaily)
         self.labelViewDailyDate.setStyleSheet("QLabel{\n"
 "font-size: 25px\n"
@@ -338,6 +335,9 @@ class Ui_StudyBuddy(object):
         self.labelViewDailyDate.setAlignment(QtCore.Qt.AlignCenter)
         self.labelViewDailyDate.setObjectName("labelViewDailyDate")
         self.gridLayout_3.addWidget(self.labelViewDailyDate, 0, 1, 1, 2)
+        self.buttonViewDailyBack = QtWidgets.QPushButton(self.pageViewDaily)
+        self.buttonViewDailyBack.setObjectName("buttonViewDailyBack")
+        self.gridLayout_3.addWidget(self.buttonViewDailyBack, 5, 0, 1, 1)
         self.stackedWidgetViews.addWidget(self.pageViewDaily)
         self.pageViewWeekly = QtWidgets.QWidget()
         self.pageViewWeekly.setObjectName("pageViewWeekly")
@@ -560,7 +560,7 @@ class Ui_StudyBuddy(object):
         self.pageViewSchedules = QtWidgets.QWidget()
         self.pageViewSchedules.setObjectName("pageViewSchedules")
         self.tableWidget = QtWidgets.QTableWidget(self.pageViewSchedules)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 100, 1271, 601))
+        self.tableWidget.setGeometry(QtCore.QRect(0, 100, 1200, 601))
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableWidget.setObjectName("tableWidget")
@@ -575,11 +575,22 @@ class Ui_StudyBuddy(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
         self.scheduleUpdate = QtWidgets.QPushButton(self.pageViewSchedules)
-        self.scheduleUpdate.setGeometry(QtCore.QRect(90, 50, 101, 41))
+        self.scheduleUpdate.setGeometry(QtCore.QRect(120, 50, 101, 41))
         self.scheduleUpdate.setObjectName("scheduleUpdate")
         self.scheduleDelete = QtWidgets.QPushButton(self.pageViewSchedules)
-        self.scheduleDelete.setGeometry(QtCore.QRect(670, 50, 75, 41))
+        self.scheduleDelete.setGeometry(QtCore.QRect(1100, 50, 100, 41))
         self.scheduleDelete.setObjectName("scheduleDelete")
+        self.buttonScheduleViewAdd = QtWidgets.QPushButton(self.pageViewSchedules)
+        self.buttonScheduleViewAdd.setGeometry(QtCore.QRect(0, 50, 101, 41))
+        self.buttonScheduleViewAdd.setObjectName("buttonScheduleViewAdd")
+        self.buttonScheduleViewCancel = QtWidgets.QPushButton(self.pageViewSchedules)
+        self.buttonScheduleViewCancel.setGeometry(QtCore.QRect(0, 710, 254, 38))
+        self.buttonScheduleViewCancel.setObjectName("buttonScheduleViewCancel")
+        self.labelScheduleView = QtWidgets.QLabel(self.pageViewSchedules)
+        self.labelScheduleView.setGeometry(QtCore.QRect(0, 10, 1166, 35))
+        self.labelScheduleView.setStyleSheet("QLabel{font-size:25px}")
+        self.labelScheduleView.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelScheduleView.setObjectName("labelScheduleView")
         self.stackedWidgetViews.addWidget(self.pageViewSchedules)
         self.pageModifySchedule = QtWidgets.QWidget()
         self.pageModifySchedule.setObjectName("pageModifySchedule")
@@ -728,7 +739,7 @@ class Ui_StudyBuddy(object):
         self.actionExit.setObjectName("actionExit")
 
         self.retranslateUi(StudyBuddy)
-        self.stackedWidgetViews.setCurrentIndex(5)
+        self.stackedWidgetViews.setCurrentIndex(6)
         QtCore.QMetaObject.connectSlotsByName(StudyBuddy)
 
     def retranslateUi(self, StudyBuddy):
@@ -770,8 +781,8 @@ class Ui_StudyBuddy(object):
         item.setText(_translate("StudyBuddy", "End Date"))
         item = self.tableViewDaily.horizontalHeaderItem(4)
         item.setText(_translate("StudyBuddy", "Status"))
-        self.buttonViewDailyBack.setText(_translate("StudyBuddy", "Back"))
         self.labelViewDailyDate.setText(_translate("StudyBuddy", "Date"))
+        self.buttonViewDailyBack.setText(_translate("StudyBuddy", "Back"))
         item = self.tableviewMonday.horizontalHeaderItem(0)
         item.setText(_translate("StudyBuddy", "Title"))
         item = self.tableviewMonday.horizontalHeaderItem(1)
@@ -836,8 +847,11 @@ class Ui_StudyBuddy(object):
         item.setText(_translate("StudyBuddy", "Start Date"))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("StudyBuddy", "End Date"))
-        self.scheduleUpdate.setText(_translate("StudyBuddy", "Update"))
+        self.scheduleUpdate.setText(_translate("StudyBuddy", "Edit"))
         self.scheduleDelete.setText(_translate("StudyBuddy", "Delete"))
+        self.buttonScheduleViewAdd.setText(_translate("StudyBuddy", "Add"))
+        self.buttonScheduleViewCancel.setText(_translate("StudyBuddy", "Back"))
+        self.labelScheduleView.setText(_translate("StudyBuddy", "Schedules"))
         self.buttonScheduleCancel.setText(_translate("StudyBuddy", "Cancel"))
         self.checkScheduleSaturday.setText(_translate("StudyBuddy", "Saturday"))
         self.buttonScheduleSubmit.setText(_translate("StudyBuddy", "Submit"))
