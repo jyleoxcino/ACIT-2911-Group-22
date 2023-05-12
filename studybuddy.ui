@@ -271,7 +271,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -1358,14 +1358,20 @@ font-size: 25px
           <height>601</height>
          </rect>
         </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
         <column>
          <property name="text">
-          <string>Title</string>
+          <string>Schdule_ID</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Tags</string>
+          <string>Title</string>
          </property>
         </column>
         <column>
@@ -1378,6 +1384,32 @@ font-size: 25px
           <string>End Date</string>
          </property>
         </column>
+       </widget>
+       <widget class="QPushButton" name="scheduleUpdate">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>50</y>
+          <width>101</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Update</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="scheduleDelete">
+        <property name="geometry">
+         <rect>
+          <x>670</x>
+          <y>50</y>
+          <width>75</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="pageModifySchedule">

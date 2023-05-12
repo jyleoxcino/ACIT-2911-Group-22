@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\sprint2\studybuddy.ui'
+# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\New folder (3)\ACIT-2911-Group-22\studybuddy.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -561,6 +561,8 @@ class Ui_StudyBuddy(object):
         self.pageViewSchedules.setObjectName("pageViewSchedules")
         self.tableWidget = QtWidgets.QTableWidget(self.pageViewSchedules)
         self.tableWidget.setGeometry(QtCore.QRect(0, 100, 1271, 601))
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(0)
@@ -572,6 +574,12 @@ class Ui_StudyBuddy(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.scheduleUpdate = QtWidgets.QPushButton(self.pageViewSchedules)
+        self.scheduleUpdate.setGeometry(QtCore.QRect(90, 50, 101, 41))
+        self.scheduleUpdate.setObjectName("scheduleUpdate")
+        self.scheduleDelete = QtWidgets.QPushButton(self.pageViewSchedules)
+        self.scheduleDelete.setGeometry(QtCore.QRect(670, 50, 75, 41))
+        self.scheduleDelete.setObjectName("scheduleDelete")
         self.stackedWidgetViews.addWidget(self.pageViewSchedules)
         self.pageModifySchedule = QtWidgets.QWidget()
         self.pageModifySchedule.setObjectName("pageModifySchedule")
@@ -720,7 +728,7 @@ class Ui_StudyBuddy(object):
         self.actionExit.setObjectName("actionExit")
 
         self.retranslateUi(StudyBuddy)
-        self.stackedWidgetViews.setCurrentIndex(4)
+        self.stackedWidgetViews.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(StudyBuddy)
 
     def retranslateUi(self, StudyBuddy):
@@ -821,13 +829,15 @@ class Ui_StudyBuddy(object):
         self.radioSearchTitle.setText(_translate("StudyBuddy", "Title"))
         self.radioSearchAll.setText(_translate("StudyBuddy", "All"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("StudyBuddy", "Title"))
+        item.setText(_translate("StudyBuddy", "Schdule_ID"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("StudyBuddy", "Tags"))
+        item.setText(_translate("StudyBuddy", "Title"))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("StudyBuddy", "Start Date"))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("StudyBuddy", "End Date"))
+        self.scheduleUpdate.setText(_translate("StudyBuddy", "Update"))
+        self.scheduleDelete.setText(_translate("StudyBuddy", "Delete"))
         self.buttonScheduleCancel.setText(_translate("StudyBuddy", "Cancel"))
         self.checkScheduleSaturday.setText(_translate("StudyBuddy", "Saturday"))
         self.buttonScheduleSubmit.setText(_translate("StudyBuddy", "Submit"))
