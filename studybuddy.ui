@@ -318,6 +318,9 @@ background-color:lightblue;
           <attribute name="horizontalHeaderVisible">
            <bool>false</bool>
           </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
           </attribute>
@@ -594,6 +597,11 @@ background-color:lightblue;
           <attribute name="verticalHeaderCascadingSectionResizes">
            <bool>true</bool>
           </attribute>
+          <column>
+           <property name="text">
+            <string>Event ID</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Title</string>

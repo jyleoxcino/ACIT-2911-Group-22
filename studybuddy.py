@@ -108,7 +108,7 @@ class Database_Controller():
         if self.conn is not None:
             c = self.conn.cursor()
             params = (week_start.strftime(
-            "%Y-%m-%d"), (week_start + timedelta(days=6)).strftime("%Y-%m-%d"))
+                "%Y-%m-%d"), (week_start + timedelta(days=6)).strftime("%Y-%m-%d"))
             data = c.execute(query, params)
         return data
 
@@ -138,7 +138,7 @@ class Database_Controller():
         values = (data, )
         c.execute(deleteQuery, values)
         self.conn.commit()
-        print(values, "has been deleted from the database.")
+        print(data, "has been deleted from the database.")
 
     def update_event(self, data):
         if data is None:
@@ -160,10 +160,10 @@ class Database_Controller():
         c = self.conn.cursor()
         c.execute(sql, params)
         self.conn.commit()
-    
+
     def get_schedule_tags(self, schedule_id):
         pass
-    
+
     def get_event_tags(self, event_id):
         query = """SELECT * FROM event_tags WHERE event_id = ?"""
         params = (event_id, )
@@ -180,14 +180,14 @@ class Database_Controller():
             data = c.execute(query, params)
             tag_names.append(data.fetchone()[1])
         return tag_names
-            
+
     def get_all_tags(self):
         query = """ SELECT * FROM tags"""
         c = self.conn.cursor()
         cursor = c.execute(query)
         data = cursor.fetchall()
         return data
-        
+
 
 class Main(QMainWindow):
     def __init__(self):
@@ -324,8 +324,6 @@ class Main(QMainWindow):
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
-     
-
         date_1 = datetime.strptime(thisWeeksSunday, '%Y-%m-%d')
 
         self.sun = (date_1 + timedelta(days=0)).strftime("%B %d")
@@ -408,13 +406,14 @@ class Main(QMainWindow):
             row_count += 1
 
     def edit_event(self):
+        self.set_event_defaults()
         self.stackedWidgetViews.setCurrentIndex(1)
         self.edit_flag = 1
         table = self.tableViewDaily
         selected_row = self.tableViewDaily.selectedItems()
         row_number = self.tableViewDaily.row(selected_row[0])
 
-        event_id = int(table.item(row_number,0).text())
+        event_id = int(table.item(row_number, 0).text())
         tags_ids = self.connectDB.get_event_tags(event_id)
         tags = self.connectDB.get_tags(tags_ids)
 
@@ -424,7 +423,8 @@ class Main(QMainWindow):
         column_number = 0
         for tag in tags:
             self.tableModifyEventTags.setColumnCount(column_count)
-            self.tableModifyEventTags.setItem(0, column_number, QTableWidgetItem(tag))
+            self.tableModifyEventTags.setItem(
+                0, column_number, QTableWidgetItem(tag))
             column_number += 1
             column_count += 1
 
@@ -444,9 +444,9 @@ class Main(QMainWindow):
     def delete_event(self):
         if len(self.tableViewDaily.selectedItems()) > 0:
             row = self.tableViewDaily.currentRow()
-            title = self.tableViewDaily.selectedItems()[0].text()
+            event_id = self.tableViewDaily.item(row, 0).text()
             try:
-                self.connectDB.delete_event(title)
+                self.connectDB.delete_event(event_id)
             except Error as e:
                 print(e)
                 return
@@ -487,12 +487,9 @@ class Main(QMainWindow):
             return "Completed"
 
     def get_sunday(self):
-
         if self.selected_date.dayOfWeek() == 7:
-
             thisWeeksSunday = time.strptime(str(self.selected_date.year(
             )) + ' ' + str(self.selected_date.weekNumber()[0]) + ' 0', '%Y %W %w')
-
         else:
             thisWeeksSunday = time.strptime(str(self.selected_date.year(
             )) + ' ' + str(self.selected_date.weekNumber()[0]-1) + ' 0', '%Y %W %w')
@@ -500,7 +497,7 @@ class Main(QMainWindow):
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
         sunday = datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
-        
+
         return sunday
 
     def select_date(self):
@@ -518,7 +515,7 @@ class Main(QMainWindow):
 
         self.comboModifyEventTagsAdd.addItem("")
         for item in self.database_tags:
-                self.comboModifyEventTagsAdd.addItem(item[1])
+            self.comboModifyEventTagsAdd.addItem(item[1])
 
     def get_event_data(self):
         data = {
@@ -569,10 +566,12 @@ class Main(QMainWindow):
             else:
                 continue
 
-        date_list = [self.sun_list, self.mon_list, self.tue_list,self.wed_list,self.thu_list,self.fri_list,self.sat_list]  
-        table_list = [self.tableviewSunday,self.tableviewMonday,self.tableviewTuesday,self.tableviewWednesday,self.tableviewThursday,self.tableviewFriday,self.tableviewSaturday]
-  
-        for i in range(0,7):
+        date_list = [self.sun_list, self.mon_list, self.tue_list,
+                     self.wed_list, self.thu_list, self.fri_list, self.sat_list]
+        table_list = [self.tableviewSunday, self.tableviewMonday, self.tableviewTuesday,
+                      self.tableviewWednesday, self.tableviewThursday, self.tableviewFriday, self.tableviewSaturday]
+
+        for i in range(0, 7):
             row_count = 1
             tablerow = 0
             for alist in date_list[i]:
@@ -583,7 +582,6 @@ class Main(QMainWindow):
                     tablerow, 1, QTableWidgetItem(self.format_completion_status(alist['completion_status'])))
                 tablerow += 1
                 row_count += 1
-
 
     def populate_daily(self):
         """
@@ -614,10 +612,10 @@ class Main(QMainWindow):
                     tablerow, 1, QTableWidgetItem(row[1]))
                 # start date
                 self.tableViewDaily.setItem(
-                    tablerow, 2, QTableWidgetItem(row[3]))
+                    tablerow, 3, QTableWidgetItem(row[4]))
                 # completion
                 self.tableViewDaily.setItem(
-                    tablerow, 3, QTableWidgetItem(self.format_completion_status(row[5])))
+                    tablerow, 4, QTableWidgetItem(self.format_completion_status(row[5])))
                 tablerow += 1
                 row_count += 1
 
