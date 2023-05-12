@@ -196,9 +196,6 @@ class Main(QMainWindow):
         # Load UI file created in Qt Designer
         loadUi("studybuddy.ui", self)
         self.connectDB = Database_Controller()
-
-        self.database_tags = self.connectDB.get_all_tags()
-
         """
         Indexes
 
@@ -253,6 +250,7 @@ class Main(QMainWindow):
 
     # Application Functions
     def __set_defaults(self):
+        self.get_tags()
         self.stackedWidgetViews.setCurrentIndex(0)
         self.buttonNavigationCalendarMonth.setDisabled(True)
         self.selected_date = self.calendarWidget.selectedDate()
@@ -271,7 +269,6 @@ class Main(QMainWindow):
             self.weekly_data.append(dic)
         self.tableViewDaily.setColumnHidden(0, True)
     # VIEWS
-
 
     def view_day(self):
         self.populate_daily()
@@ -405,6 +402,7 @@ class Main(QMainWindow):
             row_count += 1
 
     def edit_event(self):
+        self.set_event_defaults()
         self.stackedWidgetViews.setCurrentIndex(1)
         self.edit_flag = 1
         table = self.tableViewDaily
@@ -477,6 +475,15 @@ class Main(QMainWindow):
 
     # OTHER
 
+    def get_tags(self):
+        tag_boxes = [self.comboModifyEventTagsAdd]
+        self.comboModifyEventTagsAdd.addItem("")
+        for comboBox in tag_boxes:
+            tag_boxes.clear()
+        self.database_tags = self.connectDB.get_all_tags()
+        for item in self.database_tags:
+                self.comboModifyEventTagsAdd.addItem(item[1])
+
     def format_completion_status(self, data):
         if data == 0:
             return "Incomplete"
@@ -506,15 +513,12 @@ class Main(QMainWindow):
 
     def set_event_defaults(self):
         # self.dataModifyEventTags.clear()
+        self.tableModifyEventTags.clear()
         self.dataModifyEventTitle.clear()
         self.dataModifyEventDescription.clear()
         self.dataModifyEventStartDate.clear()
         self.dataModifyEventEndDate.clear()
         self.dataModifyEventStatus.setValue(0)
-
-        self.comboModifyEventTagsAdd.addItem("")
-        for item in self.database_tags:
-                self.comboModifyEventTagsAdd.addItem(item[1])
 
     def get_event_data(self):
         data = {
