@@ -255,6 +255,11 @@ class Main(QMainWindow):
     def __set_defaults(self):
         self.stackedWidgetViews.setCurrentIndex(0)
         self.buttonNavigationCalendarMonth.setDisabled(True)
+        self.popularize_weekly_list()
+        self.tableViewDaily.setColumnHidden(0, True)
+    # VIEWS
+
+    def popularize_weekly_list(self):
         self.selected_date = self.calendarWidget.selectedDate()
         self.min_date = self.get_sunday()
         self.data = self.connectDB.query_week(self.min_date)
@@ -269,9 +274,6 @@ class Main(QMainWindow):
                 'completion_status': item[5]
             }
             self.weekly_data.append(dic)
-        self.tableViewDaily.setColumnHidden(0, True)
-    # VIEWS
-
 
     def view_day(self):
         self.populate_daily()
@@ -322,7 +324,7 @@ class Main(QMainWindow):
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
-        self.labelSunday.setText(thisWeeksSunday)
+     
 
         date_1 = datetime.strptime(thisWeeksSunday, '%Y-%m-%d')
 
@@ -334,13 +336,14 @@ class Main(QMainWindow):
         self.fri = (date_1 + timedelta(days=5)).strftime("%B %d")
         self.sat = (date_1 + timedelta(days=6)).strftime("%B %d")
 
+        self.labelSunday.setText(self.sun)
         self.labelMonday.setText(self.mon)
         self.labelTuesday.setText(self.tue)
         self.labelWednesday.setText(self.wed)
         self.labelThursday.setText(self.thu)
         self.labelFriday.setText(self.fri)
         self.labelSaturday.setText(self.sat)
-
+        self.popularize_weekly_list()
         self.display_weekly_view()
         self.stackedWidgetViews.setCurrentIndex(3)
 
@@ -496,8 +499,9 @@ class Main(QMainWindow):
 
         thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
-
-        return datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
+        sunday = datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
+        
+        return sunday
 
     def select_date(self):
         self.selected_date = self.calendarWidget.selectedDate()
@@ -565,96 +569,21 @@ class Main(QMainWindow):
             else:
                 continue
 
-        row_count = 1
-        tablerow = 0
-        for row in self.mon_list:
-            self.tableviewMonday.setRowCount(row_count)
+        date_list = [self.sun_list, self.mon_list, self.tue_list,self.wed_list,self.thu_list,self.fri_list,self.sat_list]  
+        table_list = [self.tableviewSunday,self.tableviewMonday,self.tableviewTuesday,self.tableviewWednesday,self.tableviewThursday,self.tableviewFriday,self.tableviewSaturday]
+  
+        for i in range(0,7):
+            row_count = 1
+            tablerow = 0
+            for alist in date_list[i]:
+                table_list[i].setRowCount(row_count)
+                table_list[i].setItem(
+                    tablerow, 0, QTableWidgetItem(alist['title']))
+                table_list[i].setItem(
+                    tablerow, 1, QTableWidgetItem(self.format_completion_status(alist['completion_status'])))
+                tablerow += 1
+                row_count += 1
 
-            self.tableviewMonday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewMonday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.sun_list:
-            self.tableviewSunday.setRowCount(row_count)
-
-            self.tableviewSunday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewSunday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.tue_list:
-            self.tableviewTuesday.setRowCount(row_count)
-
-            self.tableviewTuesday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewTuesday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.wed_list:
-            self.tableviewWednesday.setRowCount(row_count)
-
-            self.tableviewWednesday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewWednesday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.thu_list:
-            self.tableviewThursday.setRowCount(row_count)
-
-            self.tableviewThursday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewThursday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.fri_list:
-            self.tableviewFriday.setRowCount(row_count)
-
-            self.tableviewFriday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewFriday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
-
-        row_count = 1
-        tablerow = 0
-        for row in self.sat_list:
-            self.tableviewSaturday.setRowCount(row_count)
-
-            self.tableviewSaturday.setItem(
-                tablerow, 0, QTableWidgetItem(row['title']))
-            self.tableviewSaturday.setItem(
-                tablerow, 1, QTableWidgetItem(self.format_completion_status(row['completion_status'])))
-
-            tablerow += 1
-            row_count += 1
 
     def populate_daily(self):
         """
