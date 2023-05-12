@@ -271,7 +271,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -850,13 +850,6 @@ background-color:lightblue;
           </column>
          </widget>
         </item>
-        <item row="5" column="3">
-         <widget class="QPushButton" name="buttonViewDailyBack">
-          <property name="text">
-           <string>Back</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1" colspan="2">
          <widget class="QLabel" name="labelViewDailyDate">
           <property name="styleSheet">
@@ -869,6 +862,13 @@ font-size: 25px
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QPushButton" name="buttonViewDailyBack">
+          <property name="text">
+           <string>Back</string>
           </property>
          </widget>
         </item>
@@ -1354,7 +1354,7 @@ font-size: 25px
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>1271</width>
+          <width>1200</width>
           <height>601</height>
          </rect>
         </property>
@@ -1388,27 +1388,72 @@ font-size: 25px
        <widget class="QPushButton" name="scheduleUpdate">
         <property name="geometry">
          <rect>
-          <x>90</x>
+          <x>120</x>
           <y>50</y>
           <width>101</width>
           <height>41</height>
          </rect>
         </property>
         <property name="text">
-         <string>Update</string>
+         <string>Edit</string>
         </property>
        </widget>
        <widget class="QPushButton" name="scheduleDelete">
         <property name="geometry">
          <rect>
-          <x>670</x>
+          <x>1100</x>
           <y>50</y>
-          <width>75</width>
+          <width>100</width>
           <height>41</height>
          </rect>
         </property>
         <property name="text">
          <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonScheduleViewAdd">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>50</y>
+          <width>101</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonScheduleViewCancel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>710</y>
+          <width>254</width>
+          <height>38</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Back</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelScheduleView">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>1166</width>
+          <height>35</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel{font-size:25px}</string>
+        </property>
+        <property name="text">
+         <string>Schedules</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </widget>
