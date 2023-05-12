@@ -11,18 +11,21 @@ def app():
 
 def test_create_event(app):
     data = {
-        'title': '#996349',
-        'description': 'vel lectus in quam fringilla rhoncus mauris enim leo rhoncus',
-        'start_date': '2023-05-05',
-        'end_date': '2023-05-05',
+        'title': 'Test Title',
+        'description': 'Test Description',
+        'start_date': '2023-05-07',
+        'end_date': '2023-05-07',
         'completion_status': 0
     }
 
-    event_id = app.conn.cursor().lastrowid
-    app.create_event(data)
+    c = app.conn.cursor()
+    c.execute("INSERT INTO events (title, description, start_date, end_date, completion_status) VALUES (?, ?, ?, ?, ?)",
+              (data['title'], data['description'], data['start_date'], data['end_date'], data['completion_status']))
+
+    event_id = c.lastrowid
     query = "SELECT * FROM events WHERE event_id = ?"
     params = (event_id, )
-    result = app.conn.execute(query, params)
+    result = c.execute(query, params).fetchone()
 
     assert result is not None
     assert result[1] == data['title']

@@ -566,15 +566,25 @@ class Main(QMainWindow):
             item = self.tableModifyEventTags.item(0, column)
             if item is not None:
                 current_tags.append(item.text())
-        data = {
-            "event_id": self.event_id,
-            "title": self.dataModifyEventTitle.text(),
-            # "tags": self.dataModifyEventTags.text(),
-            "description": self.dataModifyEventDescription.toPlainText(),
-            "start_date": self.dataModifyEventStartDate.text(),
-            "end_date": self.dataModifyEventEndDate.text(),
-            "completion_status": self.dataModifyEventStatus.value()
-        }
+        if self.edit_flag == 0:
+            data = {
+                "title": self.dataModifyEventTitle.text(),
+                # "tags": self.dataModifyEventTags.text(),
+                "description": self.dataModifyEventDescription.toPlainText(),
+                "start_date": self.dataModifyEventStartDate.text(),
+                "end_date": self.dataModifyEventEndDate.text(),
+                "completion_status": self.dataModifyEventStatus.value()
+            }
+        else:
+            data = {
+                "event_id": self.event_id,
+                "title": self.dataModifyEventTitle.text(),
+                # "tags": self.dataModifyEventTags.text(),
+                "description": self.dataModifyEventDescription.toPlainText(),
+                "start_date": self.dataModifyEventStartDate.text(),
+                "end_date": self.dataModifyEventEndDate.text(),
+                "completion_status": self.dataModifyEventStatus.value()
+            }
         return data
 
     def display_weekly_view(self):
