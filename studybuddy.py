@@ -410,29 +410,29 @@ class Main(QMainWindow):
         table = self.tableViewDaily
         selected_row = self.tableViewDaily.selectedItems()
         row_number = self.tableViewDaily.row(selected_row[0])
-        
+
         event_id = int(table.item(row_number,0).text())
         tags_ids = self.connectDB.get_event_tags(event_id)
         tags = self.connectDB.get_tags(tags_ids)
-        
+
         self.tableModifyEventTags.setRowCount(1)
-        
+
         column_count = 1
         column_number = 0
         for tag in tags:
             self.tableModifyEventTags.setColumnCount(column_count)
             self.tableModifyEventTags.setItem(0, column_number, QTableWidgetItem(tag))
-            column_number += 1 
+            column_number += 1
             column_count += 1
 
         if len(selected_row) == 0:
             return
-        
+
         # when selecting an item on the QTableWidget it'll edit the events that you clicked
         cur = self.connectDB.conn.cursor()
         sql = """SELECT * FROM events WHERE event_id = ?"""
         values = (event_id, )
-        
+
         for item in cur.execute(sql, values):
             self.dataModifyEventTitle.setText(item[1])
             self.dataModifyEventDescription.setText(item[2])
@@ -511,7 +511,7 @@ class Main(QMainWindow):
         self.dataModifyEventStartDate.clear()
         self.dataModifyEventEndDate.clear()
         self.dataModifyEventStatus.setValue(0)
-        
+
         self.comboModifyEventTagsAdd.addItem("")
         for item in self.database_tags:
                 self.comboModifyEventTagsAdd.addItem(item[1])
@@ -666,6 +666,7 @@ class Main(QMainWindow):
         self.dataModifyEventEndDate.setMinimumDate(dateSelected)
         self.dataModifyEventStartDate.setDate(dateSelected)
         self.dataModifyEventEndDate.setDate(dateSelected)
+        self.tableViewDaily.setRowCount(0)
 
         # Grab data from database and populate qLineEdit boxes
         cur = self.connectDB.conn.cursor()
