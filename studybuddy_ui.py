@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\ACIT-2911-Group-22\studybuddy.ui'
+# Form implementation generated from reading ui file 'c:\Users\Atlas\Desktop\eventss\studybuddy.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
