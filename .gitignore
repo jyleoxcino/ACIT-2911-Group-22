@@ -1,2 +1,4 @@
 /studybuddydevelopment
 /test
+/__pycache__
+/.pytest_cache

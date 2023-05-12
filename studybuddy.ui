@@ -529,14 +529,23 @@ background-color:lightblue;
          <widget class="QTableWidget" name="tableModifyEventTags">
           <property name="geometry">
            <rect>
-            <x>270</x>
-            <y>90</y>
-            <width>430</width>
-            <height>30</height>
+            <x>240</x>
+            <y>80</y>
+            <width>451</width>
+            <height>41</height>
            </rect>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -814,6 +823,11 @@ background-color:lightblue;
           <attribute name="verticalHeaderCascadingSectionResizes">
            <bool>true</bool>
           </attribute>
+          <column>
+           <property name="text">
+            <string>Event ID</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Title</string>
