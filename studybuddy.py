@@ -188,6 +188,29 @@ class Database_Controller():
         data = cursor.fetchall()
         return data
         
+    def search_data(self,check,searchText):
+         
+        
+        if check == "*":
+            if searchText in "Completed":
+                query = f"select * from events where title like '%{searchText}%' or description like '%{searchText}%' or start_date like '%{searchText}%' or end_date like '%{searchText}%' or completion_status = '1'"
+            elif searchText in "Incomplete":
+                query = f"select * from events where title like '%{searchText}%' or description like '%{searchText}%' or start_date like '%{searchText}%' or end_date like '%{searchText}%' or completion_status = '0'"
+            else:
+                query = f"select * from events where title like '%{searchText}%' or description like '%{searchText}%' or start_date like '%{searchText}%' or end_date like '%{searchText}%'"
+        elif check == "completion_status":
+            if 'I' in searchText:
+                query = f"select * from events where {check} = '0'"
+            elif 'C' in searchText:
+                query = f"select * from events where {check} = '1'"
+            else:
+                query = ""
+            
+        else:
+            query = f"select * from events where {check} like '%{searchText}%'"
+       
+        
+        return query
 
 class Main(QMainWindow):
     def __init__(self):
@@ -356,6 +379,8 @@ class Main(QMainWindow):
         self.buttonNavigationScheduleView.setDisabled(False)
         self.buttonNavigationScheduleAdd.setDisabled(False)
         self.buttonNavigationSettings.setDisabled(False)
+        self.date_search()
+
 
     def view_schedule(self):
         self.stackedWidgetViews.setCurrentIndex(5)
@@ -584,6 +609,65 @@ class Main(QMainWindow):
                 tablerow += 1
                 row_count += 1
 
+
+    def date_search(self):
+        if self.radioSearchAll:
+            print('yes')
+            self.counter=0
+        self.dataSearch.textChanged.connect(self.date_search_helper)
+        self.radioSearchAll.toggled.connect(self.date_search_helper)
+        self.radioSearchDescription.toggled.connect(self.date_search_helper)
+        self.radioSearchEndDate.toggled.connect(self.date_search_helper)
+        self.radioSearchStartDate.toggled.connect(self.date_search_helper)
+        self.radioSearchStatus.toggled.connect(self.date_search_helper)
+        self.radioSearchTitle.toggled.connect(self.date_search_helper)
+
+
+    def date_search_helper(self):
+        self.tableSearch.setRowCount(0)
+        print(self.dataSearch.text())
+        check = "*"
+        if self.radioSearchAll.isChecked():
+            check = "*"
+        elif self.radioSearchDescription.isChecked():
+            check = "description"
+        elif self.radioSearchEndDate.isChecked():
+            check = "end_date"
+        elif self.radioSearchStartDate.isChecked():
+            check = "start_date"
+        elif self.radioSearchStatus.isChecked():
+            check = "completion_status"
+        elif self.radioSearchTitle.isChecked():
+            check = "title"
+        else:
+            check = "*"
+        
+
+        cur = self.connectDB.conn.cursor()
+        if len(self.dataSearch.text()) >0:
+            query = self.connectDB.search_data(check,self.dataSearch.text())
+            print(query)
+            row_count = 1
+            tablerow = 0
+            for row in cur.execute(query):
+                if row is not None:
+                    self.tableSearch.setRowCount(row_count)
+                    # event_id - hidden
+                    self.tableSearch.setItem(
+                        tablerow, 0, QTableWidgetItem(row[1]))
+                    # title
+                    self.tableSearch.setItem(
+                        tablerow, 1, QTableWidgetItem(row[2]))
+                    # start date
+                    self.tableSearch.setItem(
+                        tablerow, 2, QTableWidgetItem(row[3]))
+                    # completion
+                    self.tableSearch.setItem(
+                        tablerow, 3, QTableWidgetItem(row[4]))
+                    self.tableSearch.setItem(
+                        tablerow, 4, QTableWidgetItem(self.format_completion_status(row[5])))
+                    tablerow += 1
+                    row_count += 1
 
     def populate_daily(self):
         """
