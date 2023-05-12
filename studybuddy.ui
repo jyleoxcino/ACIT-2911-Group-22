@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1355</width>
-    <height>833</height>
+    <height>804</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,6 +39,226 @@
 </string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QFrame" name="frameNavigation">
+      <property name="styleSheet">
+       <string notr="true">QPushButton:disabled {
+
+    font-weight:bold;
+	color:white;
+	background-color: #2b5777;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QFrame" name="frameNavigationCalendar">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="labelNavigationCalendar">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Calendar</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationCalendarDay">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>40</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Day</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationCalendarWeek">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>100</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Week</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationCalendarMonth">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>160</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Month</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameNavigationSearch">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>88</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="labelNavigationSearch">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>61</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationSearch">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameNavigationSchedule">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>145</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="labelNavigationSchedule">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>81</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Schedule</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationScheduleView">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>View</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationScheduleAdd">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>90</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameNavigationSettings">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="labelNavigationSettings">
+            <property name="text">
+             <string>Help</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonNavigationSettings">
+            <property name="text">
+             <string>Settings</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QStackedWidget" name="stackedWidgetViews">
       <property name="minimumSize">
@@ -1025,58 +1245,77 @@ font-size: 25px
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="1" column="0" colspan="7">
-            <widget class="QLineEdit" name="dataSearch"/>
-           </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QRadioButton" name="radioSearchTitle">
              <property name="text">
               <string>Title</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QRadioButton" name="radioSearchDescription">
-             <property name="text">
-              <string>Description</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
+           <item row="3" column="2">
             <widget class="QRadioButton" name="radioSearchTags">
              <property name="text">
               <string>Tags</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="3">
+           <item row="3" column="3">
             <widget class="QRadioButton" name="radioSearchStartDate">
              <property name="text">
               <string>Start Date</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="4">
-            <widget class="QRadioButton" name="radioSearchEndDate">
-             <property name="text">
-              <string>End Date</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="5">
+           <item row="3" column="5">
             <widget class="QRadioButton" name="radioSearchStatus">
              <property name="text">
               <string>Status</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="7">
-            <widget class="QTableWidget" name="tableSearch"/>
+           <item row="4" column="0" colspan="7">
+            <widget class="QTableWidget" name="tableSearch">
+             <column>
+              <property name="text">
+               <string>Title</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Description</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Start Date</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>End Date</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Status</string>
+              </property>
+             </column>
+            </widget>
            </item>
-           <item row="4" column="6">
+           <item row="5" column="6">
             <widget class="QPushButton" name="buttonSearchCancel">
              <property name="text">
               <string>Back</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="7">
+            <widget class="QLineEdit" name="dataSearch"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QRadioButton" name="radioSearchDescription">
+             <property name="text">
+              <string>Description</string>
              </property>
             </widget>
            </item>
@@ -1087,6 +1326,20 @@ font-size: 25px
              </property>
              <property name="text">
               <string>Search</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QRadioButton" name="radioSearchEndDate">
+             <property name="text">
+              <string>End Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="6">
+            <widget class="QRadioButton" name="radioSearchAll">
+             <property name="text">
+              <string>All</string>
              </property>
             </widget>
            </item>
@@ -1446,226 +1699,6 @@ font-size: 25px
         </layout>
        </widget>
       </widget>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QFrame" name="frameNavigation">
-      <property name="styleSheet">
-       <string notr="true">QPushButton:disabled {
-
-    font-weight:bold;
-	color:white;
-	background-color: #2b5777;
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QFrame" name="frameNavigationCalendar">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>250</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QLabel" name="labelNavigationCalendar">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>71</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Calendar</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationCalendarDay">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>40</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Day</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationCalendarWeek">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>100</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Week</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationCalendarMonth">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>160</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Month</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frameNavigationSearch">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>88</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QLabel" name="labelNavigationSearch">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>61</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationSearch">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>30</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frameNavigationSchedule">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>145</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QLabel" name="labelNavigationSchedule">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>81</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Schedule</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationScheduleView">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>30</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>View</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="buttonNavigationScheduleAdd">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>90</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frameNavigationSettings">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLabel" name="labelNavigationSettings">
-            <property name="text">
-             <string>Help</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="buttonNavigationSettings">
-            <property name="text">
-             <string>Settings</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
