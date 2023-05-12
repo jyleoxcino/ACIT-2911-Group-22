@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1355</width>
-    <height>804</height>
+    <width>1276</width>
+    <height>792</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -271,7 +271,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -669,6 +669,21 @@ background-color:lightblue;
         </sizepolicy>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1" colspan="2">
+         <widget class="QLabel" name="labelViewDailyDate">
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font-size: 25px
+}</string>
+          </property>
+          <property name="text">
+           <string>Date</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0" colspan="4">
          <widget class="QFrame" name="frameViewDailyButtonRow">
           <property name="minimumSize">
@@ -728,6 +743,12 @@ background-color:lightblue;
                 <width>111</width>
                 <height>38</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
               </property>
               <property name="maximumSize">
                <size>
@@ -797,7 +818,7 @@ background-color:lightblue;
            <string notr="true"/>
           </property>
           <property name="sizeAdjustPolicy">
-           <enum>QAbstractScrollArea::AdjustToContents</enum>
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -815,12 +836,9 @@ background-color:lightblue;
            <number>20</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>250</number>
+           <number>200</number>
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderCascadingSectionResizes">
            <bool>true</bool>
           </attribute>
           <column>
@@ -850,22 +868,7 @@ background-color:lightblue;
           </column>
          </widget>
         </item>
-        <item row="0" column="1" colspan="2">
-         <widget class="QLabel" name="labelViewDailyDate">
-          <property name="styleSheet">
-           <string notr="true">QLabel{
-font-size: 25px
-}</string>
-          </property>
-          <property name="text">
-           <string>Date</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
+        <item row="5" column="3">
          <widget class="QPushButton" name="buttonViewDailyBack">
           <property name="text">
            <string>Back</string>
@@ -1295,6 +1298,12 @@ font-size: 25px
            </item>
            <item row="7" column="0" colspan="7">
             <widget class="QTableWidget" name="tableSearch">
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>200</number>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
+             </attribute>
              <column>
               <property name="text">
                <string>Title</string>
@@ -1349,113 +1358,122 @@ font-size: 25px
        </layout>
       </widget>
       <widget class="QWidget" name="pageViewSchedules">
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>100</y>
-          <width>1200</width>
-          <height>601</height>
-         </rect>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectRows</enum>
-        </property>
-        <column>
-         <property name="text">
-          <string>Schdule_ID</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Title</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Start Date</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>End Date</string>
-         </property>
-        </column>
-       </widget>
-       <widget class="QPushButton" name="scheduleUpdate">
-        <property name="geometry">
-         <rect>
-          <x>120</x>
-          <y>50</y>
-          <width>101</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Edit</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="scheduleDelete">
-        <property name="geometry">
-         <rect>
-          <x>1100</x>
-          <y>50</y>
-          <width>100</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Delete</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="buttonScheduleViewAdd">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>50</y>
-          <width>101</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Add</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="buttonScheduleViewCancel">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>710</y>
-          <width>254</width>
-          <height>38</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Back</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelScheduleView">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>10</y>
-          <width>1166</width>
-          <height>35</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel{font-size:25px}</string>
-        </property>
-        <property name="text">
-         <string>Schedules</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="1" column="2">
+         <widget class="QPushButton" name="scheduleDelete">
+          <property name="maximumSize">
+           <size>
+            <width>111</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="labelScheduleView">
+          <property name="styleSheet">
+           <string notr="true">QLabel{font-size:25px}</string>
+          </property>
+          <property name="text">
+           <string>Schedules</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>250</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Schdule_ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Start Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>End Date</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QPushButton" name="buttonScheduleViewAdd">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>111</width>
+             <height>38</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="scheduleUpdate">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>0</y>
+             <width>111</width>
+             <height>38</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Edit</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="buttonScheduleViewCancel">
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="pageModifySchedule">
        <layout class="QGridLayout" name="gridLayout_7">
@@ -1468,30 +1486,6 @@ font-size: 25px
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_6">
-           <item row="4" column="0" colspan="9">
-            <widget class="QLineEdit" name="dataScheduleTags"/>
-           </item>
-           <item row="10" column="0" colspan="2">
-            <widget class="QPushButton" name="buttonScheduleCancel">
-             <property name="text">
-              <string>Cancel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="6">
-            <widget class="QCheckBox" name="checkScheduleSaturday">
-             <property name="text">
-              <string>Saturday</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="8">
-            <widget class="QPushButton" name="buttonScheduleSubmit">
-             <property name="text">
-              <string>Submit</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0">
             <widget class="QLabel" name="labelScheduleTags">
              <property name="text">
@@ -1499,20 +1493,13 @@ font-size: 25px
              </property>
             </widget>
            </item>
+           <item row="7" column="2" colspan="3">
+            <widget class="QDateEdit" name="dataScheduleEndDate"/>
+           </item>
            <item row="6" column="2" colspan="3">
             <widget class="QLabel" name="labelScheduleEndDate">
              <property name="text">
               <string>End Date</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2" colspan="3">
-            <widget class="QDateEdit" name="dataScheduleEndDate"/>
-           </item>
-           <item row="5" column="1">
-            <widget class="QCheckBox" name="checkScheduleMonday">
-             <property name="text">
-              <string>Monday</string>
              </property>
             </widget>
            </item>
@@ -1523,39 +1510,12 @@ font-size: 25px
              </property>
             </widget>
            </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QDateEdit" name="dataScheduleStartDate"/>
-           </item>
            <item row="5" column="2">
             <widget class="QCheckBox" name="checkScheduleTuesday">
              <property name="text">
               <string>Tuesday</string>
              </property>
             </widget>
-           </item>
-           <item row="5" column="3">
-            <widget class="QCheckBox" name="checkScheduleWednesday">
-             <property name="text">
-              <string>Wednesday</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="4">
-            <widget class="QCheckBox" name="checkScheduleThursday">
-             <property name="text">
-              <string>Thursday</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="5">
-            <widget class="QCheckBox" name="checkScheduleFriday">
-             <property name="text">
-              <string>Friday</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0" colspan="9">
-            <widget class="QTextEdit" name="dataScheduleDescription"/>
            </item>
            <item row="8" column="0" colspan="2">
             <widget class="QLabel" name="labelScheduleDescription">
@@ -1564,10 +1524,10 @@ font-size: 25px
              </property>
             </widget>
            </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QLabel" name="labelScheduleStartDate">
+           <item row="5" column="6">
+            <widget class="QCheckBox" name="checkScheduleSaturday">
              <property name="text">
-              <string>Start Date</string>
+              <string>Saturday</string>
              </property>
             </widget>
            </item>
@@ -1577,9 +1537,6 @@ font-size: 25px
               <string>Title</string>
              </property>
             </widget>
-           </item>
-           <item row="2" column="0" colspan="9">
-            <widget class="QLineEdit" name="dataScheduleTitle"/>
            </item>
            <item row="0" column="0" colspan="9">
             <widget class="QLabel" name="labelSchedule">
@@ -1591,6 +1548,67 @@ font-size: 25px
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QDateEdit" name="dataScheduleStartDate"/>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QLabel" name="labelScheduleStartDate">
+             <property name="text">
+              <string>Start Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QCheckBox" name="checkScheduleMonday">
+             <property name="text">
+              <string>Monday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="9">
+            <widget class="QLineEdit" name="dataScheduleTitle"/>
+           </item>
+           <item row="5" column="4">
+            <widget class="QCheckBox" name="checkScheduleThursday">
+             <property name="text">
+              <string>Thursday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="9">
+            <widget class="QTextEdit" name="dataScheduleDescription"/>
+           </item>
+           <item row="5" column="3">
+            <widget class="QCheckBox" name="checkScheduleWednesday">
+             <property name="text">
+              <string>Wednesday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="9">
+            <widget class="QLineEdit" name="dataScheduleTags"/>
+           </item>
+           <item row="5" column="5">
+            <widget class="QCheckBox" name="checkScheduleFriday">
+             <property name="text">
+              <string>Friday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="8">
+            <widget class="QPushButton" name="buttonScheduleCancel">
+             <property name="text">
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QPushButton" name="buttonScheduleSubmit">
+             <property name="text">
+              <string>Submit</string>
              </property>
             </widget>
            </item>
@@ -1785,7 +1803,7 @@ font-size: 25px
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1355</width>
+     <width>1276</width>
      <height>21</height>
     </rect>
    </property>
