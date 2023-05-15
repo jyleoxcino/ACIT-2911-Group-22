@@ -6,19 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1575</width>
-    <height>859</height>
+    <width>1276</width>
+    <height>792</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>StudyBuddy</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="StudyBuddyMainWidget">
    <property name="styleSheet">
     <string notr="true">QWidget{
   font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-serif;
-
-
 }
 .QPushButton {
   background-color: #e1ecf4;
@@ -40,9 +38,17 @@
 
 </string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QFrame" name="navigationFrame">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QFrame" name="frameNavigation">
+      <property name="styleSheet">
+       <string notr="true">QPushButton:disabled {
+
+    font-weight:bold;
+	color:white;
+	background-color: #2b5777;
+}</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -51,7 +57,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QFrame" name="navigationFrame1">
+        <widget class="QFrame" name="frameNavigationCalendar">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -59,12 +65,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton:disabled {
-
-    font-weight:bold;
-	color:white;
-	background-color: #2b5777;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -72,7 +73,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="labelCalendar">
+         <widget class="QLabel" name="labelNavigationCalendar">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -85,7 +86,7 @@
            <string>Calendar</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonDay">
+         <widget class="QPushButton" name="buttonNavigationCalendarDay">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -101,7 +102,7 @@
            <string>Day</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonWeek">
+         <widget class="QPushButton" name="buttonNavigationCalendarWeek">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -114,7 +115,7 @@
            <string>Week</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="buttonMonth">
+         <widget class="QPushButton" name="buttonNavigationCalendarMonth">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -130,7 +131,104 @@
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="navigationFrame3">
+        <widget class="QFrame" name="frameNavigationSearch">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>88</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="labelNavigationSearch">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>61</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationSearch">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameNavigationSchedule">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>145</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="labelNavigationSchedule">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>81</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Schedule</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationScheduleView">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>30</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>View</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonNavigationScheduleAdd">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>90</y>
+            <width>101</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameNavigationSettings">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -139,7 +237,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelNavigationSettings">
             <property name="text">
              <string>Help</string>
             </property>
@@ -149,7 +247,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_8">
+           <widget class="QPushButton" name="buttonNavigationSettings">
             <property name="text">
              <string>Settings</string>
             </property>
@@ -161,11 +259,11 @@
       </layout>
      </widget>
     </item>
-    <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+    <item row="0" column="1">
+     <widget class="QStackedWidget" name="stackedWidgetViews">
       <property name="minimumSize">
        <size>
-        <width>0</width>
+        <width>1125</width>
         <height>575</height>
        </size>
       </property>
@@ -175,7 +273,7 @@
       <property name="currentIndex">
        <number>2</number>
       </property>
-      <widget class="QWidget" name="monthPage">
+      <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -201,7 +299,6 @@
 { 
 selection-background-color: #042944; 
 selection-color: white;
-selection-border:10px solid red;
 font-size: 16px;
 
 }
@@ -219,7 +316,7 @@ background-color:lightblue;
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
+         <widget class="QFrame" name="frameMonthWeeklyView">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -240,14 +337,14 @@ background-color:lightblue;
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="labelMonthWeeklyView">
              <property name="text">
               <string>Weekly View</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QListView" name="listView">
+            <widget class="QTableWidget" name="tableMonthWeeklyView">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -261,13 +358,13 @@ background-color:lightblue;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="editPage">
-       <widget class="QFrame" name="frame_2">
+      <widget class="QWidget" name="pageModifyEvent">
+       <widget class="QFrame" name="frameModifyEvent">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>1421</width>
+          <width>740</width>
           <height>811</height>
          </rect>
         </property>
@@ -277,306 +374,748 @@ background-color:lightblue;
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLineEdit" name="lineEditTitle">
+        <widget class="QFrame" name="frameModifyEventUpper">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>50</y>
-           <width>690</width>
-           <height>22</height>
+           <y>0</y>
+           <width>741</width>
+           <height>180</height>
           </rect>
          </property>
-        </widget>
-        <widget class="QLabel" name="labelDescription">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>190</y>
-           <width>131</width>
-           <height>16</height>
-          </rect>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="text">
-          <string>Description</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>230</y>
-           <width>691</width>
-           <height>251</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelDate">
-         <property name="geometry">
-          <rect>
-           <x>320</x>
-           <y>10</y>
-           <width>101</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Date</string>
-         </property>
-        </widget>
-        <widget class="QDateEdit" name="dateEdit">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>150</y>
-           <width>110</width>
-           <height>22</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelStatus">
-         <property name="geometry">
-          <rect>
-           <x>630</x>
-           <y>130</y>
-           <width>55</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Status</string>
-         </property>
-        </widget>
-        <widget class="QSlider" name="horizontalSlider">
-         <property name="geometry">
-          <rect>
-           <x>630</x>
-           <y>150</y>
-           <width>51</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="maximum">
-          <number>1</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelTags">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>80</y>
-           <width>55</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Tags</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonSubmit">
-         <property name="geometry">
-          <rect>
-           <x>600</x>
-           <y>500</y>
-           <width>90</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Submit</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEditTags">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>100</y>
-           <width>690</width>
-           <height>22</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonCancel">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>500</y>
-           <width>90</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Cancel</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelStartDate">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>130</y>
-           <width>91</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Start Date</string>
-         </property>
-        </widget>
-        <widget class="QDateEdit" name="dateEdit_2">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>150</y>
-           <width>110</width>
-           <height>22</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelTitle">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>30</y>
-           <width>55</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Title</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelEndDate">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>130</y>
-           <width>101</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>End Date</string>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="dayPage">
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>70</y>
-          <width>690</width>
-          <height>451</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectRows</enum>
-        </property>
-        <column>
-         <property name="text">
-          <string>Title</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Tags</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>End Date</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Status</string>
-         </property>
-        </column>
-       </widget>
-       <widget class="QPushButton" name="buttonCancel_2">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>530</y>
-          <width>90</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Back</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelDate_2">
-        <property name="geometry">
-         <rect>
-          <x>320</x>
-          <y>10</y>
-          <width>141</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Date</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>30</y>
-          <width>90</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Delete</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>30</y>
-          <width>90</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Add</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>30</y>
-          <width>90</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Edit</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="page">
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="3" colspan="3">
-         <widget class="QLabel" name="labelMonth">
+         <widget class="QLineEdit" name="dataModifyEventTitle">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>690</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventTags">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>80</y>
+            <width>55</width>
+            <height>16</height>
+           </rect>
+          </property>
           <property name="text">
-           <string>Month # ~ Month #</string>
+           <string>Tags</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventDate">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>10</y>
+            <width>101</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Date</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventTitle">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>55</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Title</string>
+          </property>
+         </widget>
+         <widget class="QSlider" name="dataModifyEventStatus">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>150</y>
+            <width>51</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QDateEdit" name="dataModifyEventStartDate">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>150</y>
+            <width>110</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventStatus">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>130</y>
+            <width>55</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Status</string>
+          </property>
+         </widget>
+         <widget class="QDateEdit" name="dataModifyEventEndDate">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>150</y>
+            <width>110</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventEndDate">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>130</y>
+            <width>101</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>End Date</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventStartDate">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>130</y>
+            <width>91</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Start Date</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="comboModifyEventTagsAdd">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="tableModifyEventTags">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>80</y>
+            <width>451</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventAddTag">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>100</y>
+            <width>20</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventDeleteTag">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>100</y>
+            <width>21</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QFrame" name="frameModifyEventMiddle">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>180</y>
+           <width>741</width>
+           <height>550</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QTextEdit" name="dataModifyEventDescription">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>691</width>
+            <height>520</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="labelModifyEventDescription">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>131</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Description</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QFrame" name="frameModifyEventLower">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>730</y>
+           <width>741</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="buttonModifyEventCancel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>90</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="buttonModifyEventSubmit">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>40</y>
+            <width>90</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Submit</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pageViewDaily">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1" colspan="2">
+         <widget class="QLabel" name="labelViewDailyDate">
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font-size: 25px
+}</string>
+          </property>
+          <property name="text">
+           <string>Date</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="QFrame" name="frameViewDailyButtonRow">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>65</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="frameViewDailyAddEdit">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QPushButton" name="buttonViewDailyAdd">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>10</y>
+                <width>111</width>
+                <height>38</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="buttonViewDailyEdit">
+              <property name="geometry">
+               <rect>
+                <x>120</x>
+                <y>10</y>
+                <width>111</width>
+                <height>38</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Edit</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frameViewDailyDelete">
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="1" column="1">
+               <widget class="QPushButton" name="buttonViewDailyDelete">
+                <property name="maximumSize">
+                 <size>
+                  <width>101</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::RightToLeft</enum>
+                </property>
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QFrame" name="frameViewDailySpacer">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="4">
+         <widget class="QTableWidget" name="tableViewDaily">
+          <property name="minimumSize">
+           <size>
+            <width>1003</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>20</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Event ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Tags</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>End Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QPushButton" name="buttonViewDailyBack">
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageViewWeekly">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="1">
+         <widget class="QTableWidget" name="tableviewMonday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="6">
+         <widget class="QTableWidget" name="tableviewSaturday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="labelTuesday">
+          <property name="text">
+           <string>Tuesday #</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QTableWidget" name="tableviewTuesday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QLabel" name="labelFriday">
+          <property name="text">
+           <string>Friday #</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QTableWidget" name="tableviewWednesday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="labelWednesday">
+          <property name="text">
+           <string>Wednesday #</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QLabel" name="labelSaturday">
+          <property name="text">
+           <string>Saturday #</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QTableWidget" name="tableviewFriday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="3" column="6">
+         <widget class="QPushButton" name="buttonViewWeeklyCancel">
+          <property name="text">
+           <string>Back</string>
           </property>
          </widget>
         </item>
@@ -594,20 +1133,6 @@ background-color:lightblue;
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="labelTuesday">
-          <property name="text">
-           <string>Tuesday #</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLabel" name="labelWednesday">
-          <property name="text">
-           <string>Wednesday #</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="4">
          <widget class="QLabel" name="labelThursday">
           <property name="text">
@@ -615,126 +1140,659 @@ background-color:lightblue;
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
-         <widget class="QLabel" name="labelFriday">
+        <item row="2" column="4">
+         <widget class="QTableWidget" name="tableviewThursday">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTableWidget" name="tableviewSunday">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>100</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="7">
+         <widget class="QLabel" name="labelMonth">
+          <property name="styleSheet">
+           <string notr="true">QLabel{font-size: 25px; border-style:none}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
           <property name="text">
-           <string>Friday #</string>
+           <string>Month # ~ Month #</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="1" column="6">
-         <widget class="QLabel" name="labelSaturday">
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageViewSearch">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QFrame" name="frameSearch">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="1" column="0" colspan="2">
+            <widget class="QLabel" name="labelSearch">
+             <property name="styleSheet">
+              <string notr="true">QLabel{font-size: 25px}</string>
+             </property>
+             <property name="text">
+              <string>Search</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QRadioButton" name="radioSearchDescription">
+             <property name="text">
+              <string>Description</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QRadioButton" name="radioSearchEndDate">
+             <property name="text">
+              <string>End Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="7">
+            <widget class="QLineEdit" name="dataSearch"/>
+           </item>
+           <item row="5" column="3">
+            <widget class="QRadioButton" name="radioSearchStartDate">
+             <property name="text">
+              <string>Start Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="6">
+            <widget class="QPushButton" name="buttonSearchCancel">
+             <property name="text">
+              <string>Back</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QRadioButton" name="radioSearchTags">
+             <property name="text">
+              <string>Tags</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="7">
+            <widget class="QTableWidget" name="tableSearch">
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>200</number>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>Title</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Description</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Start Date</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>End Date</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Status</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item row="5" column="5">
+            <widget class="QRadioButton" name="radioSearchStatus">
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="6">
+            <widget class="QRadioButton" name="radioSearchTitle">
+             <property name="text">
+              <string>Title</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QRadioButton" name="radioSearchAll">
+             <property name="text">
+              <string>All</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageViewSchedules">
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="1" column="2">
+         <widget class="QPushButton" name="scheduleDelete">
+          <property name="maximumSize">
+           <size>
+            <width>111</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
-           <string>Saturday #</string>
+           <string>Delete</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="6">
-         <widget class="QPushButton" name="buttonCancel_3">
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="labelScheduleView">
+          <property name="styleSheet">
+           <string notr="true">QLabel{font-size:25px}</string>
+          </property>
+          <property name="text">
+           <string>Schedules</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>250</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Schdule_ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Start Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>End Date</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QPushButton" name="buttonScheduleViewAdd">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>111</width>
+             <height>38</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="scheduleUpdate">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>0</y>
+             <width>111</width>
+             <height>38</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Edit</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="buttonScheduleViewCancel">
           <property name="text">
            <string>Back</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QTableWidget" name="tableviewSunday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QTableWidget" name="tableviewMonday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QTableWidget" name="tableviewTuesday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QTableWidget" name="tableviewWednesday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QTableWidget" name="tableviewThursday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QTableWidget" name="tableviewFriday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="2" column="6">
-         <widget class="QTableWidget" name="tableviewSaturday">
-          <column>
-           <property name="text">
-            <string>Title</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageModifySchedule">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QFrame" name="frameSchedule">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelScheduleTags">
+             <property name="text">
+              <string>Tags</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2" colspan="3">
+            <widget class="QDateEdit" name="dataScheduleEndDate"/>
+           </item>
+           <item row="6" column="2" colspan="3">
+            <widget class="QLabel" name="labelScheduleEndDate">
+             <property name="text">
+              <string>End Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="checkScheduleSunday">
+             <property name="text">
+              <string>Sunday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QCheckBox" name="checkScheduleTuesday">
+             <property name="text">
+              <string>Tuesday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="QLabel" name="labelScheduleDescription">
+             <property name="text">
+              <string>Description</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="6">
+            <widget class="QCheckBox" name="checkScheduleSaturday">
+             <property name="text">
+              <string>Saturday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelScheduleTitle">
+             <property name="text">
+              <string>Title</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="9">
+            <widget class="QLabel" name="labelSchedule">
+             <property name="styleSheet">
+              <string notr="true">QLabel{font-size:25px}</string>
+             </property>
+             <property name="text">
+              <string>Schedule</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QDateEdit" name="dataScheduleStartDate"/>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QLabel" name="labelScheduleStartDate">
+             <property name="text">
+              <string>Start Date</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QCheckBox" name="checkScheduleMonday">
+             <property name="text">
+              <string>Monday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="9">
+            <widget class="QLineEdit" name="dataScheduleTitle"/>
+           </item>
+           <item row="5" column="4">
+            <widget class="QCheckBox" name="checkScheduleThursday">
+             <property name="text">
+              <string>Thursday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="9">
+            <widget class="QTextEdit" name="dataScheduleDescription"/>
+           </item>
+           <item row="5" column="3">
+            <widget class="QCheckBox" name="checkScheduleWednesday">
+             <property name="text">
+              <string>Wednesday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="9">
+            <widget class="QLineEdit" name="dataScheduleTags"/>
+           </item>
+           <item row="5" column="5">
+            <widget class="QCheckBox" name="checkScheduleFriday">
+             <property name="text">
+              <string>Friday</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="8">
+            <widget class="QPushButton" name="buttonScheduleCancel">
+             <property name="text">
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QPushButton" name="buttonScheduleSubmit">
+             <property name="text">
+              <string>Submit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="pageViewSettings">
+       <widget class="QFrame" name="frameSettings">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-10</y>
+          <width>1340</width>
+          <height>830</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QFrame" name="frameSettingsTitle">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="labelSettings">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>81</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Settings</string>
+            </property>
+           </widget>
+           <widget class="Line" name="lineSettingsTitle">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>170</y>
+              <width>1301</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameSettingsOne">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QCheckBox" name="checkBoxHolidayAPI">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>141</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Connect Holiday API</string>
+            </property>
+           </widget>
+           <widget class="Line" name="lineSettingsOne">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>170</y>
+              <width>1301</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameSettingsTwo">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QCheckBox" name="checkBoxSettingsEventID">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>141</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Show Event ID's</string>
+            </property>
+           </widget>
+           <widget class="Line" name="lineSettingsTwo">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>170</y>
+              <width>1301</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameSettingsData">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="labelSettingsData">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>91</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Data</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="buttonSettingsDataImport">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>81</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Import</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="buttonSettingsDataExport">
+            <property name="geometry">
+             <rect>
+              <x>100</x>
+              <y>60</y>
+              <width>81</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Export</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -745,8 +1803,8 @@ background-color:lightblue;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1575</width>
-     <height>26</height>
+     <width>1276</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
