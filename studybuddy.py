@@ -263,6 +263,7 @@ class Main(QMainWindow):
         self.set_event_defaults()
         for item in self.database_tags:
             self.comboModifyEventTagsAdd.addItem(item[1])
+
         self.edit_flag = 0
         dateSelected = self.calendarWidget.selectedDate()
         self.labelModifyEventDate.setText(dateSelected.toString("MMM dd"))
@@ -293,6 +294,7 @@ class Main(QMainWindow):
             item = self.tableModifyEventTags.item(0, column)
             if item is not None:
                 current_tags.append(item)
+                
         for item in self.database_tags:
             for tags in current_tags:
                 if item == tags:
@@ -359,11 +361,12 @@ class Main(QMainWindow):
             if item is not None:
                 current_tags.append(item)
         tag = self.comboModifyEventTagsAdd.currentText()
+        
         if tag == "":
             return
         for tags in current_tags:
-            if tag == tags:
-                break
+            if tag == tags.text():
+                return
 
         item = QTableWidgetItem(tag)
         self.comboModifyEventTagsAdd.removeItem(
