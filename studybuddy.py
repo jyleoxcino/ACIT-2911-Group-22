@@ -3,14 +3,14 @@ import sqlite3
 import time
 from time import mktime
 from PyQt5.QtWidgets import *
-from datetime import datetime, timedelta, date
-
+from datetime import datetime, timedelta
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.uic import loadUi
 from sqlite3 import Error
 from db_controller import Database_Controller
+from custom_calendar import *
 
 """""
 SQLite database
@@ -72,6 +72,8 @@ class Main(QMainWindow):
         # Navigation Menu
 
         # Calendar
+        calendarwidget = CustomCalendarWidget()
+        self.layoutMonthlyCalendar.addWidget(calendarwidget)
         self.buttonNavigationCalendarDay.clicked.connect(self.view_day)
         self.buttonNavigationCalendarMonth.clicked.connect(self.view_month)
         self.buttonNavigationCalendarWeek.clicked.connect(self.view_week)
@@ -126,8 +128,7 @@ class Main(QMainWindow):
         self.tableviewThursday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableviewFriday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableviewSaturday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.tableModifyEventTags.horizontalHeader(
-        ).setSectionResizeMode(QHeaderView.Stretch)
+        self.tableModifyEventTags.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.stackedWidgetViews.setCurrentIndex(0)
         self.buttonNavigationCalendarMonth.setDisabled(True)
         self.popularize_weekly_list()
@@ -200,7 +201,7 @@ class Main(QMainWindow):
             self.labelMonth.setText(
                 "Week"+' '+str(dateSelected.weekNumber()[0])+" of "+str(self.calendarWidget.yearShown()))
 
-        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = datetime.datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
         date_1 = datetime.strptime(thisWeeksSunday, '%Y-%m-%d')
@@ -467,11 +468,11 @@ class Main(QMainWindow):
                 "end_date": end_date}
         elif self.edit_flag == 1:
             data = {
-            "title": title,
-            "schedule_id": self.schedule_id,
-            "description": description,
-            "start_date": start_date,
-            "end_date": end_date
+                "title": title,
+                "schedule_id": self.schedule_id,
+                "description": description,
+                "start_date": start_date,
+                "end_date": end_date
             }
         return data
 
@@ -498,9 +499,9 @@ class Main(QMainWindow):
             thisWeeksSunday = time.strptime(str(self.selected_date.year(
             )) + ' ' + str(self.selected_date.weekNumber()[0]-1) + ' 0', '%Y %W %w')
 
-        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = datetime.datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
-        sunday = datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
+        sunday = datetime.datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
 
         return sunday
 
