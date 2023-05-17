@@ -269,6 +269,12 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QFrame" name="frameMonthlyCalendar">
+          <property name="minimumSize">
+           <size>
+            <width>500</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -286,7 +292,7 @@
          <widget class="QFrame" name="frameMonthWeeklyView">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>300</width>
             <height>0</height>
            </size>
           </property>
@@ -1819,7 +1825,7 @@ background-color:lightblue;
      <x>0</x>
      <y>0</y>
      <width>1410</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
