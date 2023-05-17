@@ -1,13 +1,22 @@
 import datetime
+from db_controller import Database_Controller
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from datetime import timedelta
 
+
+class EventListing(QPushButton):
+    def __init__(self,data):
+        pass
+
+class ScheduleListing(QPushButton):
+    def __init__(self, data):
+        pass
+
 class DayWidget(QWidget):
     def __init__(self, data):
         super().__init__()
-
         if data is None:
             self.data = None
         else:
@@ -25,21 +34,29 @@ class DayWidget(QWidget):
         self.setLayout(layout)
         layout.setSpacing(0)
         
-        self.labelDay = QLabel(str(data['date']))
+        self.labelDay = QLabel(data['date'].strftime("%B %d"))
         self.categoryLabel = QLabel("")
         self.categoryLabel.setAlignment(Qt.AlignCenter)
     
-        event_data = ["test", "test1", "test2", "test3", "test4"]
+        # event_data = ["placeholder","placeholder","placeholder","placeholder",]
 
         layout.addWidget(self.labelDay, 0, 0, 1, 2)
         layout.addWidget(self.categoryLabel, 0, 1, 1, 2)
-        for i in range(5):
-            layout.addWidget(QPushButton(event_data[i]), i + 1, 0, 1, 3)
+
+        i = 0
+        for item in self.data['data']:
+            item = QPushButton(item[1])
+            item.setFont(QFont('Arial', 8))
+            layout.addWidget(item, i + 1, 0, 1, 3)
+            i += 1    
+        # # for i, data in enumerate(self.data['data']):
+        # #         layout.addWidget(QPushButton(self.data['data'][i]), i + 1, 0, 1, 3)
 
 class CustomCalendarWidget(QWidget):
     def __init__(self):
         super().__init__()
-
+        
+        self.db_connection = Database_Controller()
         self.current_date = datetime.datetime.now()
 
         self.main_layout = QVBoxLayout(self)
@@ -72,7 +89,7 @@ class CustomCalendarWidget(QWidget):
         self.main_layout.addLayout(self.days_layout)
 
         self.set_defaults()
-     
+    
     def set_defaults(self):
         self.get_month()
         self.first = self.calculate_first()
@@ -91,25 +108,23 @@ class CustomCalendarWidget(QWidget):
         self.set_defaults()
         
     def populate_days(self):
-        day = self.start_date
-        for row in range(6):
+        date = self.start_date
+        print(date)
+        for row in range(5):
             for column in range(7):
+                listings = self.db_connection.get_date_listing(date)
                 data = {
-                    "date": day.strftime("%B %d"),
-                    "data": None
+                    "date": date,
+                    "data": listings
                 }
-                # dayitem = row * 7 + column + 1
                 dayWidget = DayWidget(data)
                 self.days_layout.addWidget(dayWidget, row, column)
-                day = day + timedelta(days=1)
+                date = date + timedelta(days=1)
     
     def clear_days(self):
         for i in reversed(range(self.days_layout.count())):
             item = self.days_layout.itemAt(i)
-            item.widget().close()
-    
-    def get_data(self):
-        pass
+            item.widget().close()        
 
     def get_month(self):
         self.labelMonth.setText(self.current_date.strftime("%B %Y"))

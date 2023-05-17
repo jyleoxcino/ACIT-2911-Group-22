@@ -18,17 +18,6 @@
     <string notr="true">QWidget{
   font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-serif;
 }
-.QPushButton {
-  background-color: #e1ecf4;
-  border-radius: 3px;
-  border: 1px solid #7aa7c7;
-  color: #39739d;
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0;
-  outline: none;
-  padding: 8px .8em;
-}
 
 .QLabel{
 	font-size: 17px;
@@ -271,7 +260,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -303,7 +292,7 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>400</width>
+            <width>200</width>
             <height>16777215</height>
            </size>
           </property>

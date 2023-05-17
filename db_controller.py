@@ -206,3 +206,13 @@ class Database_Controller():
         c = self.conn.cursor()
         c.execute(sql, params)
         self.conn.commit()
+
+    def get_date_listing(self, date):
+        if date is None:
+            return
+        query = f'SELECT * FROM events where end_date = "{date.strftime("%Y-%m-%d")}" LIMIT 5'
+        print(query)
+        c = self.conn.cursor()
+        data = c.execute(query)
+        print(data)
+        return data

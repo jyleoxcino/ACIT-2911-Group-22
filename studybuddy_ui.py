@@ -17,17 +17,6 @@ class Ui_StudyBuddy(object):
         self.StudyBuddyMainWidget.setStyleSheet("QWidget{\n"
 "  font-family: -apple-system,system-ui,\"Segoe UI\",\"Liberation Sans\",sans-serif;\n"
 "}\n"
-".QPushButton {\n"
-"  background-color: #e1ecf4;\n"
-"  border-radius: 3px;\n"
-"  border: 1px solid #7aa7c7;\n"
-"  color: #39739d;\n"
-"  font-size: 15px;\n"
-"  font-weight: 400;\n"
-"  margin: 0;\n"
-"  outline: none;\n"
-"  padding: 8px .8em;\n"
-"}\n"
 "\n"
 ".QLabel{\n"
 "    font-size: 17px;\n"
@@ -134,7 +123,7 @@ class Ui_StudyBuddy(object):
         self.horizontalLayout.addWidget(self.frameMonthlyCalendar)
         self.frameMonthWeeklyView = QtWidgets.QFrame(parent=self.pageViewMonth)
         self.frameMonthWeeklyView.setMinimumSize(QtCore.QSize(0, 0))
-        self.frameMonthWeeklyView.setMaximumSize(QtCore.QSize(400, 16777215))
+        self.frameMonthWeeklyView.setMaximumSize(QtCore.QSize(200, 16777215))
         self.frameMonthWeeklyView.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameMonthWeeklyView.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameMonthWeeklyView.setObjectName("frameMonthWeeklyView")
@@ -765,7 +754,7 @@ class Ui_StudyBuddy(object):
         self.actionExit.setObjectName("actionExit")
 
         self.retranslateUi(StudyBuddy)
-        self.stackedWidgetViews.setCurrentIndex(8)
+        self.stackedWidgetViews.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(StudyBuddy)
 
     def retranslateUi(self, StudyBuddy):
