@@ -1,16 +1,14 @@
-import sys
-import sqlite3
-import time
+import sys, time, datetime
 from time import mktime
 from PyQt5.QtWidgets import *
-from datetime import datetime, timedelta, date
-
+from datetime import datetime, timedelta
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.uic import loadUi
 from sqlite3 import Error
 from db_controller import Database_Controller
+from custom_calendar import *
 
 """""
 SQLite database
@@ -72,6 +70,9 @@ class Main(QMainWindow):
         # Navigation Menu
 
         # Calendar
+        self.calendarwidget = CustomCalendarWidget()
+        self.calendarwidget.signal.connect(self.edit_event)
+        self.layoutMonthlyCalendar.addWidget(self.calendarwidget)
         self.buttonNavigationCalendarDay.clicked.connect(self.view_day)
         self.buttonNavigationCalendarMonth.clicked.connect(self.view_month)
         self.buttonNavigationCalendarWeek.clicked.connect(self.view_week)
@@ -100,7 +101,7 @@ class Main(QMainWindow):
         self.buttonViewDailyEdit.clicked.connect(self.edit_event)
         self.buttonViewDailyDelete.clicked.connect(self.delete_event)
         self.tableViewDaily.doubleClicked.connect(self.edit_event)
-        self.buttonViewDailyBack.clicked.connect(self.view_day)
+        self.buttonViewDailyBack.clicked.connect(self.view_month)
 
         # Create / Edit Event View
         self.buttonModifyEventSubmit.clicked.connect(self.event_manager)
@@ -109,14 +110,15 @@ class Main(QMainWindow):
         self.buttonModifyEventDeleteTag.clicked.connect(self.delete_event_tag)
 
         # Calendar Interaction
-        self.calendarWidget.clicked.connect(self.select_date)
-        self.calendarWidget.activated.connect(self.view_day)
+        # self.calendarWidget.clicked.connect(self.select_date)
+        # self.calendarWidget.activated.connect(self.view_day)
 
         # Defaults
         self.__set_defaults()
 
     # Application Functions
     def __set_defaults(self):
+        self.selected_date = datetime.datetime.now()
         self.tableSearch.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableviewSunday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -126,8 +128,7 @@ class Main(QMainWindow):
         self.tableviewThursday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableviewFriday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableviewSaturday.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.tableModifyEventTags.horizontalHeader(
-        ).setSectionResizeMode(QHeaderView.Stretch)
+        self.tableModifyEventTags.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.stackedWidgetViews.setCurrentIndex(0)
         self.buttonNavigationCalendarMonth.setDisabled(True)
         self.popularize_weekly_list()
@@ -155,36 +156,23 @@ class Main(QMainWindow):
     # VIEWS
 
     def view_day(self):
-        self.populate_daily()
+        self.stackedWidgetViews.setCurrentIndex(2)
+        self.toggle_navigation()
         self.buttonNavigationCalendarDay.setDisabled(True)
-        self.buttonNavigationCalendarMonth.setDisabled(False)
-        self.buttonNavigationCalendarWeek.setDisabled(False)
-        self.buttonNavigationSearch.setDisabled(False)
-        self.buttonNavigationScheduleView.setDisabled(False)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
-        self.buttonNavigationSettings.setDisabled(False)
+        self.populate_daily()
         dateSelected = self.calendarWidget.selectedDate()
         self.labelViewDailyDate.setText(dateSelected.toString("MMM dd"))
-        self.stackedWidgetViews.setCurrentIndex(2)
 
     def view_month(self):
-        self.buttonNavigationCalendarDay.setDisabled(False)
-        self.buttonNavigationCalendarMonth.setDisabled(True)
-        self.buttonNavigationCalendarWeek.setDisabled(False)
-        self.buttonNavigationSearch.setDisabled(False)
-        self.buttonNavigationScheduleView.setDisabled(False)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
-        self.buttonNavigationSettings.setDisabled(False)
         self.stackedWidgetViews.setCurrentIndex(0)
+        self.toggle_navigation()
+        self.buttonNavigationCalendarMonth.setDisabled(True)
 
     def view_week(self):
-        self.buttonNavigationCalendarDay.setDisabled(False)
-        self.buttonNavigationCalendarMonth.setDisabled(False)
+        self.stackedWidgetViews.setCurrentIndex(3)
+        self.toggle_navigation()
         self.buttonNavigationCalendarWeek.setDisabled(True)
-        self.buttonNavigationSearch.setDisabled(False)
-        self.buttonNavigationScheduleView.setDisabled(False)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
-        self.buttonNavigationSettings.setDisabled(False)
+
 
         dateSelected = self.calendarWidget.selectedDate()
 
@@ -200,7 +188,7 @@ class Main(QMainWindow):
             self.labelMonth.setText(
                 "Week"+' '+str(dateSelected.weekNumber()[0])+" of "+str(self.calendarWidget.yearShown()))
 
-        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = datetime.datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
 
         date_1 = datetime.strptime(thisWeeksSunday, '%Y-%m-%d')
@@ -222,39 +210,23 @@ class Main(QMainWindow):
         self.labelSaturday.setText(self.sat)
         self.popularize_weekly_list()
         self.display_weekly_view()
-        self.stackedWidgetViews.setCurrentIndex(3)
 
     def view_search(self):
-        self.radioSearchAll.setChecked(True)
         self.stackedWidgetViews.setCurrentIndex(4)
-        self.buttonNavigationCalendarDay.setDisabled(False)
-        self.buttonNavigationCalendarMonth.setDisabled(False)
-        self.buttonNavigationCalendarWeek.setDisabled(False)
+        self.toggle_navigation()
+        self.radioSearchAll.setChecked(True)
         self.buttonNavigationSearch.setDisabled(True)
-        self.buttonNavigationScheduleView.setDisabled(False)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
-        self.buttonNavigationSettings.setDisabled(False)
         self.date_search()
 
     def view_schedule(self):
         self.stackedWidgetViews.setCurrentIndex(5)
-        self.buttonNavigationCalendarDay.setDisabled(False)
-        self.buttonNavigationCalendarMonth.setDisabled(False)
-        self.buttonNavigationCalendarWeek.setDisabled(False)
-        self.buttonNavigationSearch.setDisabled(False)
+        self.toggle_navigation()
         self.buttonNavigationScheduleView.setDisabled(True)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
-        self.buttonNavigationSettings.setDisabled(False)
         self.Populate_Schedule()
 
     def view_settings(self):
         self.stackedWidgetViews.setCurrentIndex(7)
-        self.buttonNavigationCalendarDay.setDisabled(False)
-        self.buttonNavigationCalendarMonth.setDisabled(False)
-        self.buttonNavigationCalendarWeek.setDisabled(False)
-        self.buttonNavigationSearch.setDisabled(False)
-        self.buttonNavigationScheduleView.setDisabled(False)
-        self.buttonNavigationScheduleAdd.setDisabled(False)
+        self.toggle_navigation()
         self.buttonNavigationSettings.setDisabled(True)
 
     # EVENTS
@@ -287,29 +259,34 @@ class Main(QMainWindow):
             tablerow += 1
             row_count += 1
 
-    def edit_event(self):
+    def edit_event(self, data=None):
+        print(data)
         current_tags = []
-        for column in range(self.tableModifyEventTags.columnCount()):
-            item = self.tableModifyEventTags.item(0, column)
-            if item is not None:
-                current_tags.append(item)
-        for item in self.database_tags:
-            for tags in current_tags:
-                if item == tags:
-                    pass
-                else:
-                    self.comboModifyEventTagsAdd.addItem(item[1])
-
-        self.set_event_defaults()
-        selected_row = self.tableViewDaily.selectedItems()
-        if len(selected_row) < 1:
-            return
         self.stackedWidgetViews.setCurrentIndex(1)
-        self.edit_flag = 1
-        table = self.tableViewDaily
-        row_number = self.tableViewDaily.row(selected_row[0])
+        if data is None:
+            for column in range(self.tableModifyEventTags.columnCount()):
+                item = self.tableModifyEventTags.item(0, column)
+                if item is not None:
+                    current_tags.append(item)
+            for item in self.database_tags:
+                for tags in current_tags:
+                    if item == tags:
+                        pass
+                    else:
+                        self.comboModifyEventTagsAdd.addItem(item[1])
 
-        self.event_id = int(table.item(row_number, 0).text())
+            self.set_event_defaults()
+            selected_row = self.tableViewDaily.selectedItems()
+            if len(selected_row) < 1:
+                return
+            self.edit_flag = 1
+            table = self.tableViewDaily
+            row_number = self.tableViewDaily.row(selected_row[0])
+
+            self.event_id = int(table.item(row_number, 0).text())
+        else:
+            self.event_id = data
+
         tags_ids = self.connectDB.get_event_tags(self.event_id)
         tags = self.connectDB.get_tags(tags_ids)
 
@@ -321,6 +298,7 @@ class Main(QMainWindow):
                 0, column_number, QTableWidgetItem(tag))
             column_number += 1
             column_count += 1
+
 
         # when selecting an item on the QTableWidget it'll edit the events that you clicked
         cur = self.connectDB.conn.cursor()
@@ -467,11 +445,11 @@ class Main(QMainWindow):
                 "end_date": end_date}
         elif self.edit_flag == 1:
             data = {
-            "title": title,
-            "schedule_id": self.schedule_id,
-            "description": description,
-            "start_date": start_date,
-            "end_date": end_date
+                "title": title,
+                "schedule_id": self.schedule_id,
+                "description": description,
+                "start_date": start_date,
+                "end_date": end_date
             }
         return data
 
@@ -483,6 +461,11 @@ class Main(QMainWindow):
         self.view_schedule()
 
     # OTHER
+
+    def toggle_navigation(self):
+        buttons = [self.buttonNavigationCalendarDay, self.buttonNavigationCalendarWeek, self.buttonNavigationCalendarMonth, self.buttonNavigationSearch, self.buttonNavigationScheduleView, self.buttonNavigationScheduleAdd, self.buttonNavigationSettings]
+        for button in buttons:
+            button.setDisabled(False)
 
     def format_completion_status(self, data):
         if data == 0:
@@ -498,9 +481,9 @@ class Main(QMainWindow):
             thisWeeksSunday = time.strptime(str(self.selected_date.year(
             )) + ' ' + str(self.selected_date.weekNumber()[0]-1) + ' 0', '%Y %W %w')
 
-        thisWeeksSunday = datetime.fromtimestamp(mktime(thisWeeksSunday))
+        thisWeeksSunday = datetime.datetime.fromtimestamp(mktime(thisWeeksSunday))
         thisWeeksSunday = thisWeeksSunday.strftime('%Y-%m-%d')
-        sunday = datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
+        sunday = datetime.datetime.strptime(thisWeeksSunday, "%Y-%m-%d")
 
         return sunday
 

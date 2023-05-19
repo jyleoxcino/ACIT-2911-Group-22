@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1276</width>
-    <height>792</height>
+    <width>1410</width>
+    <height>882</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,17 +17,6 @@
    <property name="styleSheet">
     <string notr="true">QWidget{
   font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-serif;
-}
-.QPushButton {
-  background-color: #e1ecf4;
-  border-radius: 3px;
-  border: 1px solid #7aa7c7;
-  color: #39739d;
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0;
-  outline: none;
-  padding: 8px .8em;
 }
 
 .QLabel{
@@ -271,7 +260,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageViewMonth">
        <property name="styleSheet">
@@ -279,53 +268,37 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QCalendarWidget" name="calendarWidget">
+         <widget class="QFrame" name="frameMonthlyCalendar">
           <property name="minimumSize">
            <size>
-            <width>391</width>
+            <width>500</width>
             <height>0</height>
            </size>
           </property>
-          <property name="font">
-           <font>
-            <family>-apple-system</family>
-            <pointsize>8</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="styleSheet">
-           <string notr="true">QCalendarWidget QAbstractItemView
-{ 
-selection-background-color: #042944; 
-selection-color: white;
-font-size: 16px;
-
-}
-QCalendarWidget QTableView{
-background-color:lightblue;
-}
-</string>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
-          <property name="gridVisible">
-           <bool>true</bool>
-          </property>
-          <property name="verticalHeaderFormat">
-           <enum>QCalendarWidget::NoVerticalHeader</enum>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QVBoxLayout" name="layoutMonthlyCalendar"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item>
          <widget class="QFrame" name="frameMonthWeeklyView">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>300</width>
             <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>400</width>
+            <width>200</width>
             <height>16777215</height>
            </size>
           </property>
@@ -1794,6 +1767,54 @@ font-size: 25px
         </layout>
        </widget>
       </widget>
+      <widget class="QWidget" name="page">
+       <widget class="QCalendarWidget" name="calendarWidget">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>817</width>
+          <height>812</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>391</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>-apple-system</family>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QCalendarWidget QAbstractItemView
+{ 
+selection-background-color: #042944; 
+selection-color: white;
+font-size: 16px;
+
+}
+QCalendarWidget QTableView{
+background-color:lightblue;
+}
+</string>
+        </property>
+        <property name="gridVisible">
+         <bool>true</bool>
+        </property>
+        <property name="verticalHeaderFormat">
+         <enum>QCalendarWidget::NoVerticalHeader</enum>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1803,7 +1824,7 @@ font-size: 25px
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1276</width>
+     <width>1410</width>
      <height>21</height>
     </rect>
    </property>
